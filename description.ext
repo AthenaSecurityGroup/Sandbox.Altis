@@ -1,0 +1,167 @@
+//	DEBUG
+// allowFunctionsLog = 1;			//	Functions debug log.
+// allowFunctionsRecompile = 1;	    //	Recompile functions on-the-fly.
+enableDebugConsole = 1;			    //	Debug console for admin-logged players.
+
+//	MISSION PARAMS
+enableTeamSwitch = 1;			    //	Manual team switch disabled.
+respawn = 3;					    //	Respawn at respawn_west (or similar) points.
+respawnButton = 0;				    //	No respawn button.
+respawnOnStart = 0;				    //	Dont respawn on start. Run respawn script on start.
+disabledAI = 1;					    //	Disable AI.
+disableChannels[] = {
+    {0, false, false},
+    {1, false, false},
+    {2, false, false},
+    {4, false, false}
+};
+forceRotorLibSimulation = 1;	    //	Force rotorLib library.
+saving = 0;						    //	Disable saving.
+skipLobby = 1;					    //	1 to bypass the role selection screen.
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	true,	// Vehicle radar [HIDDEN]
+	true,	// Vehicle compass [HIDDEN]
+	false,	// Tank direction indicator
+	true,	// Commanding menu
+	false,	// Group Bar
+	true	// HUD Weapon Cursors
+};
+
+class cfgFunctions {
+	#include "includes\funcASG.inc"
+	#include "includes\funcKK.inc"
+	#include "includes\funcLAR.inc"
+	// #include "includes\funcOUT.inc"
+};
+
+class cfgCommunicationMenu {
+	//	ATHENA BASE DEPLOYMENT
+	class bd_menu {
+		text = "Deployment";
+		submenu = "#USER:bd_subMenu";
+		expression = "";
+		cursor = "";
+		enable = "1";
+		removeAfterExpressionCall = 0;		
+	};
+	class ARCS_control {
+		text = "Radio Control";
+        submenu = "#USER:ARCS_channelMenu";
+        expression = "";
+        cursor = "";
+        enable = "1";
+        removeAfterExpressionCall = 0;
+	};       
+};
+
+class cfgCompositions {
+	#include "includes\compositions\compABDEP.inc"
+	#include "includes\compositions\compACDEP.inc"
+};
+
+//	BIS DEFINES
+#include "\A3\ui_f\hpp\defineCommon.inc"
+#include "\A3\ui_f\hpp\defineCommonGrids.inc"
+#include "\A3\ui_f\hpp\defineCommonColors.inc"
+#include "\A3\ui_f\hpp\defineDIKCodes.inc"
+#include "\A3\ui_f\hpp\defineResIncl.inc"
+#include "\A3\ui_f\hpp\defineResInclDesign.inc"
+#include "\A3\ui_f\hpp\rscCommon.inc"
+
+//	ASG UI DEFINES
+#include "includes\ui\uiCommon.inc"
+#include "includes\ui\ALOC\alocUI.inc"
+
+//	SOUND
+class cfgSounds {
+    sounds[]={
+        in1,out1,
+        radionoise1_1,radionoise1_2,radionoise1_3,
+        radionoise2_1,radionoise2_2,radionoise2_3,
+        radionoise3_1,radionoise3_2,radionoise3_3,
+        radionoise4_1,radionoise4_2,radionoise4_3,
+        deadSignal
+    };
+    class in1 {
+        name="in1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\in2a.ogg",db+1,1};
+        titles[]={};
+    };
+    class out1 {
+        name="out1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\out2a.ogg",db+1,1};
+        titles[]={};
+    };
+    class radionoise1_1 {
+        name="radionoise1_1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise1.ogg",db+10,1};
+        titles[]={};
+    };
+    class radionoise1_2 {
+        name="radionoise1_2";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise2.ogg",db+10,1};
+        titles[]={};
+    };
+    class radionoise1_3 {
+        name="radionoise1_3";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise3.ogg",db+10,1};
+        titles[]={};
+    };
+    class radionoise2_1 {
+        name="radionoise2_1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise1.ogg",db+20,1};
+        titles[]={};
+    };
+    class radionoise2_2 {
+        name="radionoise2_2";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise2.ogg",db+20,1};
+        titles[]={};
+    };
+    class radionoise2_3 {
+        name="radionoise2_3";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise3.ogg",db+20,1};
+        titles[]={};
+    };
+    class radionoise3_1 {
+        name="radionoise3_1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise1.ogg",db+30,1};
+        titles[]={};
+    };
+    class radionoise3_2 {
+        name="radionoise3_2";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise2.ogg",db+30,1};
+        titles[]={};
+    };
+    class radionoise3_3 {
+        name="radionoise3_3";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise3.ogg",db+30,1};
+        titles[]={};
+    };
+    class radionoise4_1 {
+        name="radionoise4_1";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise1.ogg",db+40,1};
+        titles[]={};
+    };
+    class radionoise4_2 {
+        name="radionoise4_2";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise2.ogg",db+40,1};
+        titles[]={};
+    };
+    class radionoise4_3 {
+        name="radionoise4_3";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\radionoise3.ogg",db+40,1};
+        titles[]={};
+    };
+    class deadSignal {
+        name="deadSignal";
+        sound[]={"@A3\Dubbing_Radio_F\sfx\loop.ogg",db+1,1};
+        titles[]={};
+    };
+};
+
+class cfgVehicleTemplates {};
+class cfgTaskTypes {};
+class cfgUnitInsignia {};
