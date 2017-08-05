@@ -20,6 +20,9 @@ if (isServer) then {
 		["Diffusion9","76561197972564938",99,""],
 		["DEL-J","76561198031485127",99,""]
 	];
+
+	// TODO: properly integrate force deployment entrypoint
+	[] call compileFinal preprocessFile "ghettoForceDeployEntry.sqf";
 };
 
 //	INITIALIZE AASW
