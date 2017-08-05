@@ -1,0 +1,3 @@
+[submodule "SimTools/ForceDeployment"]
+	path = SimTools/ForceDeployment
+	url = https://github.com/jmlane/force-deployment
