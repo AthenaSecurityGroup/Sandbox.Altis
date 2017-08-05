@@ -60,6 +60,7 @@ class cfgCommunicationMenu {
 class cfgCompositions {
 	#include "includes\compositions\compABDEP.inc"
 	#include "includes\compositions\compACDEP.inc"
+	#include "includes\compositions\compGreek.inc"
 };
 
 //	BIS DEFINES
