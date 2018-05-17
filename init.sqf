@@ -1,5 +1,5 @@
 //	SERVER PARAMS
-setViewDistance 2000;												//	View distance.
+setViewDistance 2000;												//	Max View distance.
 {_x disableTIEquipment true;} forEach (allMissionObjects "All");	//	Disable thermals.
 {_x disableNVGEquipment true;} forEach (allMissionObjects "All");	//	Disable NVGs.
 enableEngineArtillery false;										//	Disable auto-calculated artillery.
@@ -22,9 +22,6 @@ if (isServer) then {
 		["jmlane","76561197967188494",99,""]
 	];
 };
-
-//	INITIALIZE AASW
-call ASG_fnc_initAASW;
 
 //	INITIALIZE ABDEP
 call ASG_fnc_bdInit;
