@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_ACOMdoDrop
+	ASG_fnc_doMedicalDropAct
 	by:	Diffusion9
 
 	Enables a player to drop another player.
@@ -11,7 +11,7 @@
 */
 
 //	UPDATE THE ACTION TEXT.
-player setUserActionText [ACOM_actDrag, format ["Drag Wounded"]];
+player setUserActionText [medical_actDrag, format ["Drag Wounded"]];
 
 //	GRAB THE MAIN MISSION DISPLAY.
 private ["_mainDisplay"];

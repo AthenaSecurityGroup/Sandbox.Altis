@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_initACOM
+	ASG_fnc_initMedical
 	by:	Diffusion9
 	
 	Athena Combat Medical system. Similar to BIS revive.
@@ -12,15 +12,15 @@
 
 
 //	PLAYER DAMAGE HANDLER
-ACOM_handler = player addEventHandler ["HandleDamage",{ 
+medical_handler = player addEventHandler ["HandleDamage",{ 
     if (_this select 2 > 0.95) then {
-        if !(_this select 0 getVariable ["ASGmedical_stateIncap",false]) then {[true] call ASG_fnc_setACOMstate};
+        if !(_this select 0 getVariable ["ASGmedical_stateIncap",false]) then {[true] call ASG_fnc_setMedicalState};
 		0.95
 	};
 }];
 
 //	MEDIC RESCUSCITATE
-ACOM_actResuscitate = player addAction ["Resuscitate",{
+medical_actResuscitate = player addAction ["Resuscitate",{
     _ct = cursorTarget;
     if (_ct getVariable ["ASGmedical_stateIncap",false]) then {
 		{inGameUISetEventHandler [_x,"true"]} forEach ["Action","NextAction","PrevAction"];	
@@ -35,7 +35,7 @@ ACOM_actResuscitate = player addAction ["Resuscitate",{
 			(animationState player == "ainvpknlmstpsnonwnondnon_medicend");
 		};
 		_ct setVariable ["ASGmedical_stateIncap",false];
-		[false] remoteExec ["ASG_fnc_setACOMState", _ct];
+		[false] remoteExec ["ASG_fnc_setMedicalState", _ct];
 		{inGameUISetEventHandler [_x,"false"]} forEach ["Action","NextAction","PrevAction"];
     }
 },nil,6,true,false,"",'
@@ -52,7 +52,7 @@ ACOM_actResuscitate = player addAction ["Resuscitate",{
 '];
 
 //	NON-MEDIC STABILIZE
-ACOM_actStabilize = player addAction ["Stabilize",{
+medical_actStabilize = player addAction ["Stabilize",{
     _ct = cursorTarget;
     if (_ct getVariable ["ASGmedical_stateIncap",false]) then {
 		{
@@ -79,20 +79,20 @@ ACOM_actStabilize = player addAction ["Stabilize",{
 '];
 
 //	DRAGON DROP
-ACOM_actDrag = player addAction ["Drag Wounded", {
+medical_actDrag = player addAction ["Drag Wounded", {
 	_ct = cursorTarget;
 	if ({if (_x getVariable ["ASGmedical_stateIncap",false]) exitWith {TRUE}; FALSE} forEach crew _ct) then {
 		if (_ct isKindOf "Man") exitWith {
 			_isCarrying = {_x getVariable ["ASGmedical_stateIncap",false]} count attachedObjects player > 0;
 			if _isCarrying then {
 				//	TRUE, DROP THE WOUNDED
-				[] spawn ASG_fnc_ACOMDoDrop;
-				[_ct] remoteExec ["ASG_fnc_ACOMGetDrop", _ct];
+				[] spawn ASG_fnc_doMedicalDropAct;
+				[_ct] remoteExec ["ASG_fnc_getMedicalDropAct", _ct];
 				detach _ct;
 			} else {
 				//	FALSE, PICK UP THE WOUNDED.
-				[_ct] spawn ASG_fnc_ACOMDoDrag;
-				[_ct] remoteExec ["ASG_fnc_ACOMGetDrag", _ct];
+				[_ct] spawn ASG_fnc_doMedicalDragAct;
+				[_ct] remoteExec ["ASG_fnc_getMedicalDragAct", _ct];
 			};
 		};
 	};
@@ -151,7 +151,7 @@ ACOM_actDrag = player addAction ["Drag Wounded", {
 };
 
 //	LOAD WOUNDED INTO VEHICLES
-ACOM_actLoad = player addAction ["Load Wounded", {
+medical_actLoad = player addAction ["Load Wounded", {
 	_ct = cursorTarget;
 	_pl = player;
 	_vehicle = ((player nearEntities ["LandVehicle", 4]) select 0);

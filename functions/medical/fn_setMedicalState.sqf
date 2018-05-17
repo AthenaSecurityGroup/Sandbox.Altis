@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_setACOMstate
+	ASG_fnc_setMedicalState
 	by:	Diffusion9
 
 	Initializes the core of the Athena Combat Medical module.

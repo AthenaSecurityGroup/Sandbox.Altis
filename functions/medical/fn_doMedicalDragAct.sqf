@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_ACOMdoDrag
+	ASG_fnc_doMedicalDragAct
 	by:	Diffusion9
 
 	Enables a player to drag another player.
@@ -14,7 +14,7 @@
 params [["_ct", player]];
 
 //	UPDATE THE ACTION TEXT.
-player setUserActionText [ACOM_actDrag, format ["Drop Wounded"]];
+player setUserActionText [medical_actDrag, format ["Drop Wounded"]];
 
 //	SET THE DRAG STATE FOR THE WOUNDED PLAYER.
 _ct setVariable ["ASGmedical_stateDrag", true, true];
@@ -79,8 +79,8 @@ ASGmedical_dragContThread = [_ct] spawn {
 	params ["_ct"];
 	waitUntil {
 		if ( (!isPlayer _ct) || !(isPlayer player) || (player getVariable ["ASGmedical_stateIncap",false])) then {
-			[] spawn ASG_fnc_ACOMdoDrop;
-			[_ct] remoteExec ["ASG_fnc_ACOMgetDrop", _ct];
+			[] spawn ASG_fnc_doMedicalDropAct;
+			[_ct] remoteExec ["ASG_fnc_getMedicalDropAct", _ct];
 			missionNameSpace setVariable ["ASGmedical_dragContThread", nil];
 			removeMissionEventHandler ["HandleDisconnect", ASGmedical_disconnectEH];
 			detach _ct;

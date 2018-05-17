@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_ACOMgetDrop
+	ASG_fnc_getMedicalDropAct
 	by:	Diffusion9
 
 	Enables a player to get dropped by another played

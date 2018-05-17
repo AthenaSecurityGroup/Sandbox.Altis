@@ -24,7 +24,7 @@ call ASG_fnc_initAEAR;
 call ASG_fnc_initANAT;
 
 //	MEDICAL SYSTEM
-call ASG_fnc_initACOM;
+call ASG_fnc_initMedical;
 
 //	DISABLE SQUAD COMMAND BAR, AND VEH DIRECTION UI
 showHUD [true, true, true, true, false, true, false, true];

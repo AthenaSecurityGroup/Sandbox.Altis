@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_ACOMgetDrag
+	ASG_fnc_getMedicalDragAct
 	by:	Diffusion9
 
 	Enables a player to be dragged by another player.
