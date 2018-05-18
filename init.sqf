@@ -38,5 +38,5 @@ if (hasInterface) then {
 //	INITIALIZE DEPLOYMENT SYSTEM
 call ASG_fnc_initDeployment;
 
-//	INITIALIZE ARCS
-call ASG_fnc_ARCSinit;
+//	INITIALIZE radio
+call ASG_fnc_initRadio;

@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_initANAT
+	ASG_fnc_initNametags
 	by:	Diffusion9
 	
 	Runs an event handler that adds names above the heads of players in the indicated font type and size.
@@ -10,7 +10,7 @@
 	OUTPUT:		Nothing
 */
 
-ANAT_handler = addMissionEventHandler ["Draw3D", {{
+nametags_handler = addMissionEventHandler ["Draw3D", {{
 		_dist = (player distance _x) / 20;
 		_color = getArray (configFile/'CfgInGameUI'/'SideColors'/'colorFriendly');
 		_color set [3, 1 - _dist];
@@ -35,4 +35,4 @@ ANAT_handler = addMissionEventHandler ["Draw3D", {{
 		];
 	} count allPlayers - [player];
 }];
-ANAT_handler
+nametags_handler

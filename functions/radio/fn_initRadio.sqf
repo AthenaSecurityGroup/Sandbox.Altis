@@ -1,4 +1,4 @@
-call ASG_fnc_ARCSinitFunctions;
+call ASG_fnc_initRadioFunctions;
 VoN_channelData = [
 	[[1,0,0,1], "Channel 06", "%UNIT_NAME", [], false],
 	[[1,0.50,0,1], "Channel 07", "%UNIT_NAME", [], false],
@@ -29,7 +29,7 @@ if hasInterface then {
 		[5,[true,true]]
 	];
 	
-	ARCS_channelMenu = [["Radio Control",false]];
+	radio_channelMenu = [["Radio Control",false]];
 	{
 		_chID = _forEachIndex + 1;
 		_menuTitle = format ["Connect to Channel %1", _chID + 5];
@@ -42,9 +42,9 @@ if hasInterface then {
 		_isActive = "1";
 		_iconPath = "";
 		_menuEntry = [_menuTitle,[_assignedKey],_subMenuName,_CMD,[[_expression,_scriptString]],_isVisible,_isActive,_iconPath];
-		ARCS_channelMenu pushBack _menuEntry;
+		radio_channelMenu pushBack _menuEntry;
 	} forEach VoN_channelData;
-	ARCS_commMenuItem = [player,"ARCS_control",nil,nil,""] call BIS_fnc_addCommMenuItem;
+	radio_commMenuItem = [player,"radio_control",nil,nil,""] call BIS_fnc_addCommMenuItem;
 
 	0 = [] spawn {
 		VoN_Jammed = false;

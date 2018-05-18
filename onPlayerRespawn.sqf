@@ -21,7 +21,7 @@ _player setSpeaker "NoVoice";
 call ASG_fnc_initEarPro;
 
 //	PLAYER NAMETAGS
-call ASG_fnc_initANAT;
+call ASG_fnc_initNametags;
 
 //	MEDICAL SYSTEM
 call ASG_fnc_initMedical;

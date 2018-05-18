@@ -1,8 +1,8 @@
-VoN_ChannelProc_fnc = {e
+VoN_ChannelProc_fnc = {
 	params ["_chID"];
 	_present = (str player) in (VoN_channelData select (_chID - 1) select 3);
 	if (_present) then {
-		(ARCS_channelMenu select _chID) set [0, format ["Connect to Channel %1", _chID + 5]];
+		(radio_channelMenu select _chID) set [0, format ["Connect to Channel %1", _chID + 5]];
 		(VoN_channelData select (_chID - 1) select 3) deleteAt ((VoN_channelData select (_chID - 1) select 3) find (str player));
 		if (currentChannel isEqualTo (_chID + 5)) then {setCurrentChannel 5};
 		_chID radioChannelRemove [player];
@@ -10,7 +10,7 @@ VoN_ChannelProc_fnc = {e
 	} else {
 		_chID radioChannelAdd [player];
 		(VoN_channelData select (_chID - 1) select 3) pushBackUnique (str player);
-		(ARCS_channelMenu select _chID) set [0, format ["Disconnect from Channel %1", _chID + 5]];
+		(radio_channelMenu select _chID) set [0, format ["Disconnect from Channel %1", _chID + 5]];
 		setCurrentChannel (_chID + 5);
 		publicVariable "VoN_channelData";
 	};
@@ -50,11 +50,11 @@ VoN_EventIn_fnc = {
 	[_VoN_srcObj, _spkr] spawn {
 		params ["_VoN_srcObj", "_spkr"];
 		private ["_distance", "_staticLevel"];
-		diag_log format ["ARCS_initFunctions:	_VoN_srcObj: 	%1", _VoN_srcObj];
-		diag_log format ["ARCS_initFunctions:	_spkr: 			%1", _spkr];
+		diag_log format ["radio_initFunctions:	_VoN_srcObj: 	%1", _VoN_srcObj];
+		diag_log format ["radio_initFunctions:	_spkr: 			%1", _spkr];
 		while {!isNull _VoN_srcObj} do {
 			_distance = player distance _spkr;
-			diag_log format ["ARCS_initFunctions:	_distance: 		%1", _distance];
+			diag_log format ["radio_initFunctions:	_distance: 		%1", _distance];
 			switch true do {
 				case (_distance <= 200) : {_staticLevel = ["radionoise1_1", "radionoise1_2", "radionoise1_3"]};
 				case (_distance >= 201 && _distance <= 400) : {_staticLevel = ["radionoise2_1", "radionoise2_2", "radionoise2_3"]};

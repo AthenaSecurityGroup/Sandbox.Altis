@@ -3,31 +3,18 @@
 //  allowFunctionsRecompile = 1;
 enableDebugConsole[] = {"76561197972564938", "76561198031485127", "76561197967188494"};
 
-//	MISSION PARAMS
+//	GENERAL PARAMETERS
 enableTeamSwitch = 1;
 respawn = 3;
 respawnButton = 0;
 respawnOnStart = 0;
+respawnDialog = 0;
 disabledAI = 1;
-disableChannels[] = {
-    {0, false, false},
-    {1, false, false},
-    {2, false, false},
-    {4, false, false}
-};
+disableChannels[] = {{0, false, false},{1, false, false},{2, false, false}};
 forceRotorLibSimulation = 1;
 saving = 0;
 skipLobby = 1;
-showHUD[] = {
-	true,
-	true,
-	true,
-	true,
-	false,
-	true,
-	false,
-	true
-};
+showHUD[] = {true,true,false,true,false,true,false,false,true};
 allowSubordinatesTakeWeapons = 1;
 aiKills = 0;
 debriefing = 0;
@@ -55,8 +42,8 @@ class cfgFunctions {
             class getPlayerASGRank {};
             class savePlayerLoc {};
         };
-        class ANAT {
-            class initANAT {};
+        class nametags {
+            class initNametags {};
         };
         class medical {
             class initMedical {};
@@ -87,9 +74,9 @@ class cfgFunctions {
             class submitFreightOrder {};
             class startVehicleDelivery {};
         };
-        class ARCS {
-            class ARCSinitFunctions {};
-            class ARCSinit {};
+        class radio {
+            class initRadioFunctions {};
+            class initRadio {};
         };
     };
     //	KILLZONE KID's FUNCTIONS, FOR GENERAL USAGE
@@ -125,9 +112,9 @@ class cfgCommunicationMenu {
 		enable = "1";
 		removeAfterExpressionCall = 0;		
 	};
-	class ARCS_control {
+	class radio_control {
 		text = "Radio Control";
-        submenu = "#USER:ARCS_channelMenu";
+        submenu = "#USER:radio_channelMenu";
         expression = "";
         cursor = "";
         enable = "1";
@@ -141,13 +128,13 @@ class cfgCompositions {
 };
 
 //	BIS DEFINES
-// #include "\A3\ui_f\hpp\defineCommon.inc"
-// #include "\A3\ui_f\hpp\defineCommonGrids.inc"
-// #include "\A3\ui_f\hpp\defineCommonColors.inc"
-// #include "\A3\ui_f\hpp\defineDIKCodes.inc"
-// #include "\A3\ui_f\hpp\defineResIncl.inc"
-// #include "\A3\ui_f\hpp\defineResInclDesign.inc"
-// #include "\A3\ui_f\hpp\rscCommon.inc"
+#include "\A3\ui_f\hpp\defineCommon.inc"
+#include "\A3\ui_f\hpp\defineCommonGrids.inc"
+#include "\A3\ui_f\hpp\defineCommonColors.inc"
+#include "\A3\ui_f\hpp\defineDIKCodes.inc"
+#include "\A3\ui_f\hpp\defineResIncl.inc"
+#include "\A3\ui_f\hpp\defineResInclDesign.inc"
+#include "\A3\ui_f\hpp\rscCommon.inc"
 
 //	ASG UI DEFINES
 #include "includes\ui\uiCommon.inc"

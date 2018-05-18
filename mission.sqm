@@ -74,7 +74,7 @@ randomSeed=11352911;
 class ScenarioData
 {
 	author="Diffusion9";
-	overviewText="TBD";
+	overviewText="Athena Security Group Sandbox";
 	briefing=0;
 	debriefing=0;
 	saving=0;
@@ -140,7 +140,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="Athena Security Sandbox";
+		briefingName="Athena Security Group Sandbox";
 		overviewText="TBD";
 		timeOfChanges=1800.0002;
 		startWeather=0;
