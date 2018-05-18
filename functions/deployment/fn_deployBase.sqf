@@ -58,10 +58,10 @@ if (isNil _baseVar) then {
 //	ATTACH LOGISTICS REQUEST, IF APPLICABLE
 [_deployPos,{
 	_deployPos = _this;
-	_alocObj = _deployPos nearestObject "Land_Laptop_unfolded_F";
-	if (!isNil "_alocObj") then {
-		ALOC_reqAction = _alocObj addAction ["Request Logistics", {
-			createDialog "ALC_dialog";
+	_logisticsObj = _deployPos nearestObject "Land_Laptop_unfolded_F";
+	if (!isNil "_logisticsObj") then {
+		logistics_reqAction = _logisticsObj addAction ["Request Logistics", {
+			createDialog "logisticsdialog";
 		}, nil, 0, false, true, "", "", 8, false];
 	};
 }] remoteExec ["call", allPlayers, true];

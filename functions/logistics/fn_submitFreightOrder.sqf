@@ -115,8 +115,8 @@ if (_ctrlIDC in [1503]) then {
 	hint "Requisition order has been submitted.";
 	
 	//	SEND THE FREIGHT DELIVERY REQ
-	ALOC_reqPVEH = ["FDR", _order];
-	publicVariableServer "ALOC_reqPVEH";
+	logistics_reqPVEH = ["FDR", _order];
+	publicVariableServer "logistics_reqPVEH";
 	
 	//	CLOSE THIS DIALOG
 	closeDialog 2;
@@ -133,8 +133,8 @@ for "_x" from 0 to _lnbOrderRowNum-1 do {
 	_ordItemName = _orderIDC lnbText [_x,1];
 	_ordItem = _orderIDC lnbData [_x,1];
 	_ordAmount = _orderIDC lnbValue [_x,0];
-	[[ALOC_logItems, ALOC_logItemsV, ALOC_logMags], _ordItem] call BIS_fnc_findNestedElement params ["_0","_1","_2"];
-	_itemCost = [ALOC_logItems, ALOC_logItemsV, ALOC_logMags] select _0 select _1 select (_2 + 1);
+	[[logistics_logItems, logistics_logItemsV, logistics_logMags], _ordItem] call BIS_fnc_findNestedElement params ["_0","_1","_2"];
+	_itemCost = [logistics_logItems, logistics_logItemsV, logistics_logMags] select _0 select _1 select (_2 + 1);
 	_cost = _cost + (_ordAmount * _itemCost);
 };
 

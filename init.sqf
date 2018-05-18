@@ -12,8 +12,8 @@ if (isServer) then {
 	//	ACDEP INITIALIZATIOn (SERVER)
 	call ASG_fnc_initCampaignStart;
 	
-	//	ALOC QUEUE WATCHER
-	call ASG_fnc_alocInit;
+	//	logistics QUEUE WATCHER
+	call ASG_fnc_initLogistics;
 
 	//	INIT PLAYER DATABASE
 	ASG_pDB = [

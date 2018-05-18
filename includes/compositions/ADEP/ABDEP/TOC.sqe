@@ -5912,7 +5912,7 @@ class items
 		flags=4;
 		class Attributes
 		{
-			name="ALOC_logHelipad2";
+			name="logistics_logHelipad2";
 		};
 		id=275;
 		type="Land_HelipadSquare_F";

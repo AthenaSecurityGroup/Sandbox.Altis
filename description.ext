@@ -76,16 +76,16 @@ class cfgFunctions {
             class abandonMortar {};
             class destroyMortar {};
         };
-        class ALOC {
+        class logistics {
             class setASGequipment {};
             class setASGuniform {};
-            class alocDialogInit {};
-            class alocFDR {};
-            class alocFDRProc {};
-            class alocInit {};
-            class alocPDR {};
-            class alocProcUI {};
-            class alocVDR {};
+            class initLogisticsDialog {};
+            class startFreightDelivery {};
+            class sortFreightDelivery {};
+            class initLogistics {};
+            class startPlayerDelivery {};
+            class submitFreightOrder {};
+            class startVehicleDelivery {};
         };
         class ARCS {
             class ARCSinitFunctions {};
@@ -151,7 +151,7 @@ class cfgCompositions {
 
 //	ASG UI DEFINES
 #include "includes\ui\uiCommon.inc"
-#include "includes\ui\ALOC\alocUI.inc"
+#include "includes\ui\logistics\logisticsUI.inc"
 
 //	SOUND
 class cfgSounds {

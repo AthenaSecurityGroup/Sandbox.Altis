@@ -38,7 +38,7 @@ _rowCount = -1;
 		_catalogIDC lnbSetValue [[_rowCount, 0], _cost];
 		_catalogIDC lnbSetData [[_rowCount, 1], _item];
 	} forEach _x;
-} forEach [ALOC_logItems, ALOC_logItemsV, ALOC_logMags];
+} forEach [logistics_logItems, logistics_logItemsV, logistics_logMags];
 _catalogIDC lnbSetCurSelRow 0;
 
 //	INVOICE COLUMN HEADERS

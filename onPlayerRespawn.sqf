@@ -35,11 +35,11 @@ if (hasInterface) then {
 	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
 };
 
-//	SEND ALOC CALL FOR HELICOPTER
+//	SEND logistics CALL FOR HELICOPTER
 if !ACDEP_State then {
 	//	SEND TAXI REQUEST
-	ALOC_reqPVEH = ["PDR", str _player];
-	publicVariableServer "ALOC_reqPVEH";
+	logistics_reqPVEH = ["PDR", str _player];
+	publicVariableServer "logistics_reqPVEH";
 } else {
 	//	ACDEP INITIALIZATION (CLIENT)
 	[] call ASG_fnc_initCampaignStart;
