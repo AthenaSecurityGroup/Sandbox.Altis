@@ -16,7 +16,7 @@
 params ["_state", "_text", "_fadeTimer"];
 
 //	DEFINE THE SCREEN LAYER
-_playerStateLayer = "AGEN_pStateLayer" call BIS_fnc_rscLayer;
+_playerStateLayer = "general_pStateLayer" call BIS_fnc_rscLayer;
 
 private ["_type"];
 if _state then {

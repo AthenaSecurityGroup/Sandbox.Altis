@@ -15,10 +15,10 @@ _player setSpeaker "NoVoice";
 [_player] call ASG_fnc_setASGequipment;// [player] call ASG_fnc_setASGUniform;
 
 //	OBTAIN RANK FROM SERVER
-[_player] remoteExec ["ASG_fnc_getASGrank", 2];
+[_player] remoteExec ["ASG_fnc_getPlayerASGRank", 2];
 
 //	EARPLUGS
-call ASG_fnc_initAEAR;
+call ASG_fnc_initEarPro;
 
 //	PLAYER NAMETAGS
 call ASG_fnc_initANAT;

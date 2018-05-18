@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_initAPDH
+	ASG_fnc_handlePlayerDisconnect
 	by:	Diffusion9
 
 	An event handler which handles players disconnecting from the server.
@@ -19,6 +19,6 @@ APDH_handler = addMissionEventHandler ["handleDisconnect", {
 	//	EXIT IF INCAPACITATED
 	if (_unit getVariable "ASGmedical_stateIncap") exitWith {true};
 	//	IF NOT INCAPACITATED, SAVE ASGLOC POSITION
-	[_unit, _uid, false] call ASG_fnc_procASGloc;
+	[_unit, _uid, false] call ASG_fnc_savePlayerLoc;
 }];
 APDH_handler

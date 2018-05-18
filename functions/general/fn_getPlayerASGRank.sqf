@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_getASGrank
+	ASG_fnc_getPlayerASGRank
 	by:	Diffusion9
 
 	Gets the rank of the unit from the ASG database.

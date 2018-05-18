@@ -1,6 +1,6 @@
 /*
 
-	ASG_fnc_mortarDefineFaction
+	ASG_fnc_defineMortarFaction
 	
 	Takes an input String and determines information for mortar script.
 	
@@ -45,7 +45,7 @@ switch (toUpper _mortarFaction) do {
 		[_mortarType, _mortarSide, _detectSide, _mortarCrewType, _triggerActivate];
 	};
 	default {
-		diag_log "[ASG_fnc_mortarDefineFaction]:		Faction improperly defined.";
+		diag_log "[ASG_fnc_defineMortarFaction]:		Faction improperly defined.";
 		terminate _thisScript;
 	};
 };

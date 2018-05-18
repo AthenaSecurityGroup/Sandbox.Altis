@@ -1,4 +1,4 @@
-# Athena Security Group Altis Sandbox
+# Athena Security Group Sandbox
 
 For more information about Athena Security Group:
 - http://www.athenasecuritygroup.com

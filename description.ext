@@ -47,13 +47,13 @@ class cfgFunctions {
             class deploySpecial {};
             class deployFightingPos {};
         };
-        class AGEN {
+        class general {
             class setPlayerState {};
-            class initAPDH {};
+            class handlePlayerDisconnect {};
             class remPlayerObj {};
             class advProgressBar {};
-            class getASGrank {};
-            class procASGloc {};
+            class getPlayerASGRank {};
+            class savePlayerLoc {};
         };
         class ANAT {
             class initANAT {};
@@ -66,15 +66,15 @@ class cfgFunctions {
             class getMedicalDragAct {};
             class getMedicalDropAct {};
         };
-        class AEAR {
-            class initAEAR {};
+        class earPro {
+            class initEarPro {};
         };
-        class AIMOR {
-            class mortarLogic {};
+        class aimortar {
+            class initMortarLogic {};
             class deployMortar {};
-            class mortarDefineFaction {};
-            class mortarAbandon {};
-            class mortarDestroyed {};
+            class defineMortarFaction {};
+            class abandonMortar {};
+            class destroyMortar {};
         };
         class ALOC {
             class setASGequipment {};

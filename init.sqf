@@ -7,7 +7,7 @@ enableEngineArtillery false;										//	Disable auto-calculated artillery.
 //	DEDICATED SERVER, OR PLAYER-HOST
 if (isServer) then {
 	//	INIT PLAYER DISCONNECT EVENT HANDLER
-	call ASG_fnc_initAPDH;
+	call ASG_fnc_handlePlayerDisconnect;
 	
 	//	ACDEP INITIALIZATIOn (SERVER)
 	call ASG_fnc_initCampaignStart;

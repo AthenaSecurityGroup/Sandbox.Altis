@@ -1,6 +1,6 @@
 /*
 
-	ASG_fnc_mortarLogic
+	ASG_fnc_initMortarLogic
 	
 	Receives a string to create variable names, and a list of targets. Processes the targets and initiates the mortar logic.
 	
@@ -42,8 +42,8 @@ missionNameSpace setVariable [_mortarStsStr, [_mortarVarStr] spawn {
 	_statusCheck = false;
 	waitUntil {
 		sleep 2;
-		if (_mortarVarStr call ASG_fnc_mortarDestroyed) exitWith {_statusCheck = true};
-		if (_mortarVarStr call ASG_fnc_mortarAbandon) exitWith {
+		if (_mortarVarStr call ASG_fnc_destroyMortar) exitWith {_statusCheck = true};
+		if (_mortarVarStr call ASG_fnc_abandonMortar) exitWith {
 			sleep 1.5;
 			{
 				_x setDamage 1;
@@ -71,7 +71,7 @@ waitUntil {
 
 //	WHEN CALL FOR FIRE HAS BEEN CLEARED, SELECT TARGET.
 _mortarTarget = selectRandom _mortarTargetArr;
-diag_log format ['[mortarLogic]:	Requesting fire at grid %1.', (mapGridPosition _mortarTarget)];
+diag_log format ['[initMortarLogic]:	Requesting fire at grid %1.', (mapGridPosition _mortarTarget)];
 
 //	BEGIN CALL FOR FIRE LOOP.
 private ['_targetPOS'];
@@ -84,7 +84,7 @@ waitUntil {
 		if (side _x == (side (missionNameSpace getVariable _mortarPriStr))) exitWith {
 			_strikeCounter = 5;
 			_mortarBrackPOS = [0,0,0];
-			diag_log format ['[mortarLogic]:	Friendlies are too close for fire mission. Skipping.'];
+			diag_log format ['[initMortarLogic]:	Friendlies are too close for fire mission. Skipping.'];
 		};
 	} forEach _nearList;
 	
@@ -105,13 +105,13 @@ waitUntil {
 			( (abs _adjustmentX > (_rangeData select 1)) || (abs _adjustmentY > (_rangeData select 1)) );
 		};
 		_targetPOS = ((getPOS _mortarTarget) vectorAdd [_adjustmentX, _adjustmentY, 0]);
-		diag_log format ['[mortarLogic]:	Firing solution at position %1. Strike %2', _targetPOS, _strikeCounter];
+		diag_log format ['[initMortarLogic]:	Firing solution at position %1. Strike %2', _targetPOS, _strikeCounter];
 		(missionNameSpace getVariable _mortarPriStr) doArtilleryFire [_targetPOS, (currentMagazine (missionNameSpace getVariable _mortarPriStr)), 1]
 	} else {
 		_targetPOS = (getPOS _mortarTarget);
 		if ((_mortarBrackPOS distance2D _mortarTarget) <= _mortarLoiterDist) then {
 			//	FIRE FOR EFFECT
-			diag_log format ['[mortarLogic]:	Firing solution at position %1. Strike %2', _targetPOS, _strikeCounter];
+			diag_log format ['[initMortarLogic]:	Firing solution at position %1. Strike %2', _targetPOS, _strikeCounter];
 			_barrageCounter = 0;
 			waitUntil {
 				_barrageCounter = _barrageCounter + 1;

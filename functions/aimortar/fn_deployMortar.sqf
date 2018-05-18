@@ -30,7 +30,7 @@ params [
 //	POSITION AND FACTION MUST BE DEFINED.
 if ((isNil {_mortarPOS}) || (isNil {_mortarFaction})) exitWith {true};
 //	GET MORTAR DATA; OBJ TYPE, SIDE, DETECTDATA, CREW TYPE.
-_mortarData = [_mortarFaction] call ASG_fnc_mortarDefineFaction;
+_mortarData = [_mortarFaction] call ASG_fnc_defineMortarFaction;
 _mortarData params ['_mortarType', '_mortarSide', '_detectSide', '_mortarCrewType', '_triggerActivate'];
 
 //	GENERATE VARIABLE NAMES -- FOR USE LATER.
@@ -97,7 +97,7 @@ missionNamespace setVariable [
 	"
 		_mortarVarStr = (vehicleVarName (attachedTo thisTrigger));
 		diag_log format ['[deployMortar]:	%1 has been triggered.', _mortarVarStr];
-		missionNameSpace setVariable [format ['%1_script', _mortarVarStr], [_mortarVarStr, thisList, (missionNamespace getVariable (format ['%1_ammoState', _mortarVarStr]))] spawn ASG_fnc_mortarLogic];
+		missionNameSpace setVariable [format ['%1_script', _mortarVarStr], [_mortarVarStr, thisList, (missionNamespace getVariable (format ['%1_ammoState', _mortarVarStr]))] spawn ASG_fnc_initMortarLogic];
 	",
 	"
 		_mortarVarStr = (vehicleVarName (attachedTo thisTrigger));

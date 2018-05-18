@@ -2,7 +2,7 @@ ALOC_reqQueue params ["_pdrQueue", "_fdrQueue", "_vdrQueue"];
 
 //	CHECK IF TIED TO EXISTING LOCATION
 {
-	if ([_x, getPlayerUID (missionNamespace getVariable _x), true] call ASG_fnc_procASGloc) then {
+	if ([_x, getPlayerUID (missionNamespace getVariable _x), true] call ASG_fnc_savePlayerLoc) then {
 		[false, "", 4.5] remoteExec ["ASG_fnc_setPlayerState", (missionNamespace getVariable _x)];
 		(ALOC_reqQueue select 0) deleteAt ([ALOC_reqQueue, _x] call BIS_fnc_findNestedElement select 1);
 	};

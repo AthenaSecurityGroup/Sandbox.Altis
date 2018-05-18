@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_procASGloc
+	ASG_fnc_savePlayerLoc
 	by:	Diffusion9
 
 	Sets the players logout location (if valid) in the player database.

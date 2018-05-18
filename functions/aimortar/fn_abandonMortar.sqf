@@ -1,6 +1,6 @@
 /*
 
-	ASG_fnc_mortarAbandon
+	ASG_fnc_abandonMortar
 	
 	Turns the received value into a mortar group reference and checks if that group is down to 1 member.
 	Or checks if there are enemies within 200 m of the mortar.

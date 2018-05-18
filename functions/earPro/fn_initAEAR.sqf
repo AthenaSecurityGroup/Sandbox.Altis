@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_initAEAR
+	ASG_fnc_initEarPro
 	by:	Diffusion9
 	
 	Adds a keyDown eventHandler that watched the 'End' key, or UserAction 1 in the Custom Action menu.
@@ -12,9 +12,9 @@
 
 #include "\A3\Ui_F\hpp\defineDIKCodes.inc"
 
-if (!isNil "AEAR_handler") exitWith {true};
+if (!isNil "earPro_handler") exitWith {true};
 
-AEAR_handler = findDisplay 46 displayAddEventHandler ["keyDown", {
+earPro_handler = findDisplay 46 displayAddEventHandler ["keyDown", {
     params ['_display', '_key', '_shift', '_ctrl','_alt'];
 	private ['_conditions'];
 	//	IF CUSTOM KEY IS UNDEFINED
@@ -34,4 +34,4 @@ AEAR_handler = findDisplay 46 displayAddEventHandler ["keyDown", {
         };      
     };
 }];
-AEAR_handler
+earPro_handler
