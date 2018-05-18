@@ -29,8 +29,11 @@ call ASG_fnc_initMedical;
 //	DISABLE SQUAD COMMAND BAR, AND VEH DIRECTION UI
 showHUD [true, true, true, true, false, true, false, true];
 
-//	INITIALIZE DYNAMIC GROUPS
-call ASG_fnc_initADYN;
+//	DYNAMIC GROUPS - CLIENT EXEC
+if (hasInterface) then {
+	// Initializes the player/client side Dynamic Groups framework and registers the player group
+	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
+};
 
 //	SEND ALOC CALL FOR HELICOPTER
 if !ACDEP_State then {

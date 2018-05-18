@@ -23,11 +23,20 @@ if (isServer) then {
 	];
 };
 
-//	INITIALIZE ABDEP
-call ASG_fnc_initDeployment;
+//	DYNAMIC GROUPS - SERVER EXEC
+if (isServer) then {
+	// Initializes the Dynamic Groups framework and groups led by a player at mission start will be registered
+	["Initialize"] call BIS_fnc_dynamicGroups;
+};
 
-//	INITIALIZE DYNAMIC GROUPS
-call ASG_fnc_initADYN;
+//	DYNAMIC GROUPS - CLIENT EXEC
+if (hasInterface) then {
+	// Initializes the player/client side Dynamic Groups framework and registers the player group
+	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
+};
+
+//	INITIALIZE DEPLOYMENT SYSTEM
+call ASG_fnc_initDeployment;
 
 //	INITIALIZE ARCS
 call ASG_fnc_ARCSinit;

@@ -76,9 +76,6 @@ class cfgFunctions {
             class mortarAbandon {};
             class mortarDestroyed {};
         };
-        class ADYN {
-            class initADYN {};
-        };
         class ALOC {
             class setASGequipment {};
             class setASGuniform {};
