@@ -1,6 +1,6 @@
 /*
 	
-	ASG_fnc_bdProcOrder
+	ASG_fnc_deployBase
 	by:	Diffusion9
 	
 	Process an order sent by a player to deploy a base. Receives the player who requested the deployment, and
@@ -36,24 +36,24 @@ if (_baseType == "RH" && !(stance player == "PRONE")) exitWith {
 if (isNil _baseVar) then {
 	if (_baseType == "RH" || _baseType == "HFP") then {
 		//	SHORT CIRCUIT SPECIAL DEPLOYMENT CONDITION
-		[_baseType, _deployPos, _baseVar, _player] call ASG_fnc_procABDEPspecial;
+		[_baseType, _deployPos, _baseVar, _player] call ASG_fnc_deploySpecial;
 	} else {
 		//	DEPLOY
 		missionNamespace setVariable [_baseVar, [_baseType, _deployPos, _deployOffset, _deployDir, _deployNormals] call LAR_fnc_spawnComp];
 		
 		//	CREATE BASE MAP MARKER
-		[_base, "CREATE", _deployPos] call ASG_fnc_bdProcMark;
+		[_base, "CREATE", _deployPos] call ASG_fnc_selectMarkerAct;
 	};
 } else {
 	[missionNamespace getVariable [_baseVar, nil]] call LAR_fnc_deleteComp;
 	missionNamespace setVariable [_baseVar, nil];
 
 	//	DELETE BASE MARKER
-	[_base, "DELETE"] call ASG_fnc_bdProcMark;
+	[_base, "DELETE"] call ASG_fnc_selectMarkerAct;
 };
 
 //	PROCESS NEARBY MARKER RANKS (FOR HIDING)
-[nil, "UPDATE", _deployPos] call ASG_fnc_bdProcMark;
+[nil, "UPDATE", _deployPos] call ASG_fnc_selectMarkerAct;
 
 //	ATTACH LOGISTICS REQUEST, IF APPLICABLE
 [_deployPos,{

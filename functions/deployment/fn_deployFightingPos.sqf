@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_ABDEPprocFP
+	ASG_fnc_deployFightingPos
 	by:	Diffusion9
 */
 

@@ -1,6 +1,6 @@
 /*
 
-	ASG_fnc_bdProcMenu
+	ASG_fnc_createBaseMenu
 	by:	Diffusion9
 	
 	Create the entries for the bd_subMenu based on the baseData player whitelist using KK_fnc_findAll.

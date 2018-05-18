@@ -1,6 +1,6 @@
 /*
 
-	ASG_fnc_bdProcMark
+	ASG_fnc_selectMarkerAct
 	by:	Diffusion9
 	
 	Hide all base-type markers from nearby bases that are around the deployed base.
@@ -33,9 +33,9 @@ switch (toUpper _rType) do {
 	};
     case "UPDATE": {
 		//	UPDATE MARKERS
-		[_bPos] call ASG_fnc_bdProcMarkA;
+		[_bPos] call ASG_fnc_updateMarker;
 	};
     default {
-		diag_log format ["[bdProcMark]:	DEFAULT SWITCH"];
+		diag_log format ["[selectMarkerAct]:	DEFAULT SWITCH"];
 	};
 };

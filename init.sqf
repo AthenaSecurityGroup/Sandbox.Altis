@@ -10,7 +10,7 @@ if (isServer) then {
 	call ASG_fnc_initAPDH;
 	
 	//	ACDEP INITIALIZATIOn (SERVER)
-	call ASG_fnc_initACDEP;
+	call ASG_fnc_initCampaignStart;
 	
 	//	ALOC QUEUE WATCHER
 	call ASG_fnc_alocInit;
@@ -24,7 +24,7 @@ if (isServer) then {
 };
 
 //	INITIALIZE ABDEP
-call ASG_fnc_bdInit;
+call ASG_fnc_initDeployment;
 
 //	INITIALIZE DYNAMIC GROUPS
 call ASG_fnc_initADYN;

@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_initACDEP
+	ASG_fnc_initCampaignStart
 	by:	Diffusion9
 
 	Initiates the Athena Campaign Deployment system under correct conditions.
@@ -27,7 +27,7 @@ if (isServer) then {
 		};
 
 		//	INITIATE ON-SCREEN GUIDANCE TEXT FOR ADMIN
-		[_ACDEPadmin] remoteExec ["ASG_fnc_setACDEPpos", _ACDEPadmin];
+		[_ACDEPadmin] remoteExec ["ASG_fnc_openCampaignUI", _ACDEPadmin];
 	} else {
 		//	LOADING AN EXISTING STATE
 		missionNamespace setVariable ["ACDEP_State", false, true];

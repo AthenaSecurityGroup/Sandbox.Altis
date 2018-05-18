@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_procACDEPpos
+	ASG_fnc_getCampaignStartPos
 	by:	Diffusion9
 	
 	Process the position selected by the ACDEP Admin and executes based on terrain type (water or land).

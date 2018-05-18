@@ -1,5 +1,5 @@
 /*
-	ASG_fnc_procABDEPspecial
+	ASG_fnc_deploySpecial
 	by:	Diffusion9
 */
 
@@ -28,7 +28,7 @@ switch (_baseType) do {
 		_deployOffset = [0,0,-0.780];
 
 		//	SERVER DEPLOY THE FIGHTING POSITION
-		missionNamespace setVariable [format ["%1_%2script", _baseVar, _player],[_playerBaseVar,_baseType,_deployPos,_deployOffset,_deployDir,_deployNormals] spawn ASG_fnc_ABDEPprocFP];
+		missionNamespace setVariable [format ["%1_%2script", _baseVar, _player],[_playerBaseVar,_baseType,_deployPos,_deployOffset,_deployDir,_deployNormals] spawn ASG_fnc_deployFightingPos];
 
 		//	REMOTE EXEC PROGRESS BAR ON PLAYER.
 		[

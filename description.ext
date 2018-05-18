@@ -35,27 +35,17 @@ debriefing = 0;
 class cfgFunctions {
     //  ASG FUNCTIONS FOR THE SANDBOX
     class ASG {
-        class ADEP {
-            class bdInit {};
-            class bdProcMenu {};
-            class bdProcOrder {};
-            class bdProcMark {};
-            class bdProcMarkA {};
-            class initACDEP {};
-            class procACDEPpos {};
-            class setACDEPpos {};
-            class procABDEPspecial {};
-            class ABDEPprocFP {};
-        };
-        class AASW {
-            class initAASW {};
-            class initAASWlpServer {};
-            class initAASWlpClient {};
-            class procAASWcivSpawn {};
-            class procAASWmilSpawn {};
-            class setAASWdata {};
-            class getAASWdata {};
-            class initAASWcivAction {};
+        class deployment {
+            class initDeployment {};
+            class createBaseMenu {};
+            class deployBase {};
+            class selectMarkerAct {};
+            class updateMarker {};
+            class initCampaignStart {};
+            class getCampaignStartPos {};
+            class openCampaignUI {};
+            class deploySpecial {};
+            class deployFightingPos {};
         };
         class AGEN {
             class setPlayerState {};

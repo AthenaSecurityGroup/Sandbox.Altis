@@ -39,6 +39,6 @@ if !ACDEP_State then {
 	publicVariableServer "ALOC_reqPVEH";
 } else {
 	//	ACDEP INITIALIZATION (CLIENT)
-	[] call ASG_fnc_initACDEP;
+	[] call ASG_fnc_initCampaignStart;
 };
 

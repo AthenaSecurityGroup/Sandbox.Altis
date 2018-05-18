@@ -1,6 +1,6 @@
 /*
 	
-	ASG_fnc_bdInit
+	ASG_fnc_initDeployment
 	by:	Diffusion9
 	
 	Initializes the required elements for the Athena Security base deployment system. baseData contains names,
@@ -95,7 +95,7 @@ if isServer then {
 	//	RUN DEPLOYMENT SERVER
 	"bd_requestBase" addPublicVariableEventHandler {
 		params ['_pVar','_data'];
-		_data call ASG_fnc_bdProcOrder;
+		_data call ASG_fnc_deployBase;
 	};
 };
 
@@ -105,7 +105,7 @@ if hasInterface then {
 	bd_subMenu = [["Deploy", false]];
 	
 	//	PARSE DEPLOYMENT DATA BASED ON PLAYER
-	_eligible = [] call ASG_fnc_bdProcMenu;
+	_eligible = [] call ASG_fnc_createBaseMenu;
 	
 	//	ACTIVE MENU FOR PLAYER
 	if _eligible then {
