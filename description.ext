@@ -14,7 +14,6 @@ disableChannels[] = {{0, false, false},{1, false, false},{2, false, false}};
 forceRotorLibSimulation = 1;
 saving = 0;
 skipLobby = 1;
-showHUD[] = {true,true,false,true,false,true,false,false,true};
 allowSubordinatesTakeWeapons = 1;
 aiKills = 0;
 debriefing = 0;
@@ -123,8 +122,42 @@ class cfgCommunicationMenu {
 };
 
 class cfgCompositions {
-	#include "includes\compositions\compABDEP.inc"
-	#include "includes\compositions\compACDEP.inc"
+    class FDB {
+        #include "includes\compositions\ASGbases\campaignStartCamp.sqe"
+    };    
+    class TOC {
+        #include "includes\compositions\ASGbases\toc.sqe"
+    };
+    class MOB {
+        #include "includes\compositions\ASGbases\mob.sqe"
+    };
+    class FOB {
+        #include "includes\compositions\ASGbases\fob.sqe"
+    };
+    class COP {
+        #include "includes\compositions\ASGbases\cop.sqe"
+    };
+    class FCP {
+        #include "includes\compositions\ASGbases\fcp.sqe"
+    };
+    class FSP {
+        #include "includes\compositions\ASGbases\fsp.sqe"
+    };
+    class PB {
+        #include "includes\compositions\ASGbases\pb.sqe"
+    };
+    class RH {
+        #include "includes\compositions\ASGbases\rh.sqe"
+    };
+    class HFP {
+        #include "includes\compositions\ASGbases\hfp.sqe"
+    };
+    class HFPR {
+        #include "includes\compositions\ASGbases\hfpr.sqe"
+    };	
+    class PFP {
+        #include "includes\compositions\ASGbases\pfp.sqe"
+    };
 };
 
 //	BIS DEFINES

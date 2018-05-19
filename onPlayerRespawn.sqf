@@ -8,11 +8,16 @@ oldSubs = showSubtitles false;
 _player setSpeaker "NoVoice";
 [_player, "NoVoice"] remoteExecCall ["setSpeaker", 0];
 
+//	ZERO VELOCITY, AND MOVE TO MAP CENTER
+player setVelocity [0,0,0];
+player setPos [(worldsize/2),((worldsize/2) + 1000),0];
+
 //	DISABLE PLAYER FOR SPAWN PROCESS
 [true, "", 0.001] call ASG_fnc_setPlayerState;
 
 //	SET ASG UNIFORM AND GEAR
-[_player] call ASG_fnc_setASGequipment;// [player] call ASG_fnc_setASGUniform;
+[_player] call ASG_fnc_setASGequipment;
+// [player] call ASG_fnc_setASGUniform;
 
 //	OBTAIN RANK FROM SERVER
 [_player] remoteExec ["ASG_fnc_getPlayerASGRank", 2];
