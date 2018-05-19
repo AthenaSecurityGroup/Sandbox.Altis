@@ -27,13 +27,13 @@ baseData = [
 	["Fighting Position",(player getVariable "ASG_rank"),"HFP_0"],
 	["Recon Hide",[7, 99],"RH_0"],
 	[
-		"Patrol Base 1",							//	Menu item name.
-		[8,20, 99],									//	Rank numbers with access.
-		"PB_0",										//	Composition name.
-		["mil_flag", "ColorRed", "Patrol Base One"],//	Marker info.
-		[],											//	Persistence - Deployment Position
-		[],											//	Persistence - Cargo Data
-		[]											//	Persistence	- Vehicle Data
+		"Patrol Base 1",							//	0 - Menu item name.
+		[8,20, 99],									//	1 - Rank numbers with access.
+		"PB_0",										//	2- Composition name.
+		["mil_flag", "ColorRed", "Patrol Base One"],//	3 - Marker info.
+		[],											//	4 - Persistence - Deployment Position
+		[],											//	5 - Persistence - Cargo Data
+		[]											//	6 - Persistence	- Vehicle Data
 	],
 	["Patrol Base 2",[8,20, 99],"PB_1",["mil_flag", "ColorGreen", "Patrol Base Two"]],
 	["Patrol Base 3",[8,20, 99],"PB_2",["mil_flag", "ColorBlue", "Patrol Base Three"]],
