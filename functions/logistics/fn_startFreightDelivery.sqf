@@ -165,5 +165,5 @@ waitUntil {
 };
 
 deleteVehicle logistics_logHelipad;
-deleteVehicle _freightCrate;
+if !(isNil _freightCrate) then {deleteVehicle _freightCrate};
 logistics_logHelipad = nil;
