@@ -116,6 +116,57 @@ fn_processSubContainers = {
 	};
 };
 
+//	LOAD CARGO INTO A SPECIFIC CONTAINER
+fn_loadCargo = {
+	params ["_targetContainer","_masterArray"];
+	_masterArray params ["_typeArray","_amountArray"];
+	_typeArray apply {
+		switch true do {
+			case ("Mine" in (_x call BIS_fnc_itemType) || "Magazine" in (_x call BIS_fnc_itemType)): {
+				//	MAGAZINE
+				_targetContainer addMagazineCargoGlobal [_x, _amountArray select ([_typeArray, _x] call BIS_fnc_findNestedElement select 0)];	//	, getNumber (configfile >> "CfgMagazines" >> _x >> "count")
+			};
+			case ("Item" in (_x call BIS_fnc_itemType)): {
+				//	ITEM 
+				_targetContainer addItemCargoGlobal [_x, _amountArray select ([_typeArray, _x] call BIS_fnc_findNestedElement select 0)];
+			};
+			case ("Weapon" in (_x call BIS_fnc_itemType)): {
+				//	WEAPON
+				_targetContainer addWeaponCargoGlobal [_x call BIS_fnc_baseWeapon, _amountArray select ([_typeArray, _x] call BIS_fnc_findNestedElement select 0)];
+			};
+			case ("Equipment" in (_x call BIS_fnc_itemType)): {
+				_itemTypeArr = [];
+				//	GLASSES
+				_itemTypeArr pushback ("G_Balaclava_blk" in ([configfile >> "CfgGlasses" >> _x , true] call BIS_fnc_returnParents));	//	"G_Balaclava_blk"
+				//	HEADGEAR
+				_itemTypeArr pushback ("ItemCore" in ([configfile >> "CfgWeapons" >> _x , true] call BIS_fnc_returnParents));			//	"ItemCore"
+				//	VEST
+				_itemTypeArr pushback ("ItemCore" in ([configfile >> "CfgWeapons" >> _x , true] call BIS_fnc_returnParents));			//	"ItemCore"
+				//	UNIFORM
+				_itemTypeArr pushback ("Uniform_Base" in ([configfile >> "CfgWeapons" >> _x , true] call BIS_fnc_returnParents));		//	"Uniform_Base"
+				//	BACKPACK
+				_itemTypeArr pushback ("Bag_Base" in ([configfile >> "cfgVehicles" >> _x , true] call BIS_fnc_returnParents));			//	"Bag_Base"
+				
+				switch true do {
+					case (_itemTypeArr select 0);
+					case (_itemTypeArr select 1);
+					case (_itemTypeArr select 2);
+					case (_itemTypeArr select 3): {
+						//	ADD	HEAD\VEST\UNIFORM
+						_targetContainer addItemCargoGlobal [_x, _amountArray select ([_typeArray, _x] call BIS_fnc_findNestedElement select 0)];
+					};
+					case (_itemTypeArr select 4): {
+						//	ADD BACKPACK
+						_targetContainer addBackpackCargoGlobal  [_x, _amountArray select ([_typeArray, _x] call BIS_fnc_findNestedElement select 0)];
+					};
+					default {};
+				};
+			};
+			default {};
+		};
+	};
+};
+
 //	GET ACTIVE BASES
 //	Should only run on the server.
 fn_saveBaseData = {
@@ -127,13 +178,13 @@ fn_saveBaseData = {
 			_markerName = format ["%1_M", _compName];
 			if !((getMarkerPos _markerName) isEqualTo [0,0,0]) then {
 				//	MARKER IS ACTIVE, START GATHERING PERSISTENCE
-				//	GET POSITION, PUSH TO BASEDATA
+				//	GET POSITION
 				_baseDeployPos = getMarkerPos _markerName;
 				_x set [4, _baseDeployPos];
-				//	GET CARGO, PUSH TO BASEDATA
-				_baseCargoArray = (str _compName) call fn_saveBaseCargo;
-				//	GET NEAR VEHICLES, PUSH TO BASEDATA
-				// _baseVehicleArray = _baseDeployPos call fn_saveBaseVehicles;
+				//	GET CARGO
+				_x call fn_saveBaseCargo;
+				//	GET NEAR VEHICLES
+				_baseDeployPos call fn_saveBaseVehicles;
 			};
 		};
 	} forEach baseData;
@@ -164,7 +215,6 @@ fn_saveBaseCargo = {
 			_baseDataMaster pushBack persist_containerMaster;
 		};
 	} forEach ((missionNamespace getVariable _compName) call LAR_fnc_getCompObjects);
-	
 	//	PUSH THE PRIMARY DATA ARRAY INTO BASEDATA
 	_baseDataIndex = [baseData, _compName] call BIS_fnc_findNestedElement select 0;
 	(baseData select _baseDataIndex) set [5, _baseDataMaster];
@@ -172,7 +222,37 @@ fn_saveBaseCargo = {
 
 fn_saveBaseVehicles = {};
 
-fn_loadBaseData = {};
+fn_loadBaseData = {
+	{
+		_x params ["_menuStr", "_rankAccess", "_compName", "_markerDetails", "_deployPos", "_cargoData", "_vehData"];
+		//	IF DEPLOYPOS HAS DATA, THE BASE WAS ACTIVE, AND NEEDS TO BE RELOADED.
+		if !(isNil {_deployPos} || {_deployPos isEqualTo []}) then {
+			//	RE-DEPLOY THE BASE AT THE POSITION FROM MEMORY.
+			//	LOAD CARGO INTO CARGO CONTAINERS.
+			private _containerCounter = 0;
+			{
+				_objParents = [configFile >> "cfgVehicles" >> typeOf _x, true] call BIS_fnc_returnParents;
+				if ("ReammoBox_F" in _objParents) then {
+					_currentContainer = _x;
+					//	CLEAR FOR INSERTION.
+					clearWeaponCargoGlobal _x;
+					clearMagazineCargoGlobal _x;
+					clearItemCargoGlobal _x;
+					clearBackpackCargoGlobal _x;
+					uiSleep 0.05;
+					//	ADD TO CONTAINER FROM CARGO DATA ARRAY
+					{
+						[_currentContainer, _x] call fn_loadCargo;
+					} forEach (_cargoData select _containerCounter);
+					//	+1 FOR CARGO DATA INDEXING
+					_containerCounter = _containerCounter + 1;
+				};
+			} forEach ((missionNamespace getVariable _compName) call LAR_fnc_getCompObjects);
+			//	RELOAD VEHICLES IN THE VICINITY.
+		};
+	//	TO DO: CHANGE missionNamespace TO profileNamespace
+	} forEach (missionNamespace getVariable "baseData");
+};
 
 //	DEBUG SCRIPT
 
@@ -180,6 +260,7 @@ fn_loadBaseData = {};
 call fn_saveBaseData;
 //	CLEAR THE CARGO, FOR DEBUGGING
 //	DELETE NEARBY VEHICLES
+uiSleep 2;
 //	UNDEPLOY THE BASE
 //	LOAD PERSISTENCE DATA
 call fn_loadBaseData;
