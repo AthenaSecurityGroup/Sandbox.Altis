@@ -183,13 +183,14 @@ fn_saveBaseData = {
 				_x set [4, _baseDeployPos];
 				//	GET CARGO
 				_x call fn_saveBaseCargo;
-				//	GET NEAR VEHICLES
+				//	GET VEHICLES
 				_baseDeployPos call fn_saveBaseVehicles;
 			};
 		};
 	} forEach baseData;
 	//	SAVE TO SERVER PROFILE NAMESPACE
-	// profileNamespace setVariable ["baseData", baseData];
+	profileNamespace setVariable ["baseData", baseData];
+	saveProfileNamespace;
 };
 
 fn_saveBaseCargo = {
@@ -220,8 +221,48 @@ fn_saveBaseCargo = {
 	(baseData select _baseDataIndex) set [5, _baseDataMaster];
 };
 
-fn_saveBaseVehicles = {};
+//	SAVE ALL VEHICLES, THEIR ATTRIBUTES, AND CARGO, WITHIN 200 M
+fn_saveBaseVehicles = {
+	//	GET ALL NEARBY VEHICLES, MINUS THE LOGISTICS HELO (IF ITS PARKED).
+	private _baseVehicles = (_baseDeployPos nearEntities [["LandVehicle", "Helicopter"], 200]);
+	//	IF THE LOGISTICS HELO IS ACTIVE, REMOVE IT FROM THE BASE VEHICLES ARRAY
+	if (!isNil {logistics_logHelo}) then {_baseVehicles deleteAt ([_baseVehicles, logistics_logHelo] call BIS_fnc_findNestedElement select 0)};
+	//	SAVE VEHICLE ATTRIBUTES
+	private _vehicleMasterArray = [];
+	{
+		//	SAVE VEHICLE TEXTURES, AND PRIMARY ATTRIBUTES
+		private _vehTextures = getObjectTextures _x;
+		_vehAttributes = [_x, [missionNamespace, ""],[getPos _x, getDir _x]] call BIS_fnc_saveVehicle;
+		//	REBRAND TO ASG, IF OFFROAD
+		if (["Offroad",(typeOf _x), false] call BIS_fnc_inString) then {
+			_vehTextures = ["a3\soft_f\offroad_01\data\offroad_01_ext_base01_co.paa","a3\soft_f_bootcamp\offroad_01\data\offroad_01_ext_ig_10_co.paa"];
+		};
+		_vehAttributes set [2, _vehTextures];
+		//	TODO: SAVE VEHICLE CARGO
+		//	PUSH INTO MASTER VEHICLE ARRAY FOR THIS BASE
+		_vehicleMasterArray pushBack _vehAttributes;
+	} forEach _baseVehicles;
+	
+	//	PUSH THE PRIMARY DATA ARRAY INTO BASEDATA
+	_baseDataIndex = [baseData, _compName] call BIS_fnc_findNestedElement select 0;
+	(baseData select _baseDataIndex) set [6, _vehicleMasterArray];
+};
 
+//	LOAD ALL NEARBY VEHICLES WITH CORRECT CARGO, AND SET VEHICLE ATTRIBUTES
+fn_loadBaseVehicles = {
+	{
+		_x params ["_vehType","_vehAttributes", "_vehTextures", "_vehCrew", "_vehPosDir"];
+		_vehPosDir params ["_vehPos", "_vehDir"];
+		_veh = createVehicle [_vehType, _vehPos,[],0,"NONE"];
+		_veh setDir _vehDir;
+		[_veh, [missionNamespace, "_vehAttributes"]] call BIS_fnc_loadVehicle;
+		{
+			_veh setObjectTextureGlobal [_forEachIndex, _x];
+		} forEach _vehTextures;
+	} forEach _vehData;
+};
+
+//	LOAD ALL BASE-RELATED DATA FROM BASEDATA
 fn_loadBaseData = {
 	{
 		_x params ["_menuStr", "_rankAccess", "_compName", "_markerDetails", "_deployPos", "_cargoData", "_vehData"];
@@ -239,7 +280,6 @@ fn_loadBaseData = {
 					clearMagazineCargoGlobal _x;
 					clearItemCargoGlobal _x;
 					clearBackpackCargoGlobal _x;
-					uiSleep 0.05;
 					//	ADD TO CONTAINER FROM CARGO DATA ARRAY
 					{
 						[_currentContainer, _x] call fn_loadCargo;
@@ -249,18 +289,17 @@ fn_loadBaseData = {
 				};
 			} forEach ((missionNamespace getVariable _compName) call LAR_fnc_getCompObjects);
 			//	RELOAD VEHICLES IN THE VICINITY.
+			_x call fn_loadBaseVehicles;
 		};
-	//	TO DO: CHANGE missionNamespace TO profileNamespace
-	} forEach (missionNamespace getVariable "baseData");
+	} forEach (profileNamespace getVariable "baseData");
 };
 
 //	DEBUG SCRIPT
 
 //	SAVE PERSISTENCE DATA
 call fn_saveBaseData;
-//	CLEAR THE CARGO, FOR DEBUGGING
 //	DELETE NEARBY VEHICLES
-uiSleep 2;
+uiSleep 5;
 //	UNDEPLOY THE BASE
 //	LOAD PERSISTENCE DATA
 call fn_loadBaseData;
