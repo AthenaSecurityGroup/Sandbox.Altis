@@ -108,11 +108,12 @@ fn_processSubContainers = {
 	params ["_targetContainer"];
 	_backpackCargo = getBackpackCargo _targetContainer;
 	_backpackCargo call fn_mergeToMaster;
-
 	_everyContainer = everyContainer _targetContainer;
-	_everyContainer params ["_containerType","_containerObj"];
 	if !(_everyContainer isEqualTo []) then {
-		[_containerType, _containerObj] apply {(_x select 1) call fn_processWeaponsItemsMags};
+		{
+			_x params ["_containerType","_containerObj"];
+			_containerObj call fn_processWeaponsItemsMags;
+		} forEach _everyContainer;
 	};
 };
 
@@ -238,7 +239,19 @@ fn_saveBaseVehicles = {
 			_vehTextures = ["a3\soft_f\offroad_01\data\offroad_01_ext_base01_co.paa","a3\soft_f_bootcamp\offroad_01\data\offroad_01_ext_ig_10_co.paa"];
 		};
 		_vehAttributes set [2, _vehTextures];
-		//	TODO: SAVE VEHICLE CARGO
+		//	SAVE VEHICLE CARGO, RESET THE MASTER PERSISTENCE ARRAYS
+		persist_masterMagArr = [[],[]];
+		persist_masterItemArr = [[],[]];
+		persist_masterWeaponsArr = [[],[]];
+		persist_masterContainerArr = [[],[]];
+		persist_containerMaster = [];
+		//	GET ALL CONTENTS OF THIS BASE VEHICLE
+		_x call fn_processWeaponsItemsMags;
+		_x call fn_processSubContainers;
+		//	FORM CONTAINER MASTER ARRAY
+		persist_containerMaster = [persist_masterMagArr,persist_masterItemArr,persist_masterWeaponsArr,persist_masterContainerArr];
+		//	ADD EACH CONTAINER ARRAY TO THE PRIMARY DATA ARRAY FOR THE COMPOSITION
+		(_vehAttributes select 4) set [2, persist_containerMaster];
 		//	PUSH INTO MASTER VEHICLE ARRAY FOR THIS BASE
 		_vehicleMasterArray pushBack _vehAttributes;
 	} forEach _baseVehicles;
@@ -251,14 +264,18 @@ fn_saveBaseVehicles = {
 //	LOAD ALL NEARBY VEHICLES WITH CORRECT CARGO, AND SET VEHICLE ATTRIBUTES
 fn_loadBaseVehicles = {
 	{
-		_x params ["_vehType","_vehAttributes", "_vehTextures", "_vehCrew", "_vehPosDir"];
-		_vehPosDir params ["_vehPos", "_vehDir"];
+		_x params ["_vehType","_vehAttributes", "_vehTextures", "_vehCrew", "_vehDetails"];
+		_vehDetails params ["_vehPos", "_vehDir", "_vehCargo"];
 		_veh = createVehicle [_vehType, _vehPos,[],0,"NONE"];
 		_veh setDir _vehDir;
 		[_veh, [missionNamespace, "_vehAttributes"]] call BIS_fnc_loadVehicle;
-		{
-			_veh setObjectTextureGlobal [_forEachIndex, _x];
-		} forEach _vehTextures;
+		{_veh setObjectTextureGlobal [_forEachIndex, _x]} forEach _vehTextures;
+		//	CLEAR FOR CARGO INSERTION
+		clearWeaponCargoGlobal _veh;
+		clearMagazineCargoGlobal _veh;
+		clearItemCargoGlobal _veh;
+		clearBackpackCargoGlobal _veh;
+		{[_veh, _x] call fn_loadCargo} forEach _vehCargo;
 	} forEach _vehData;
 };
 
@@ -299,7 +316,9 @@ fn_loadBaseData = {
 //	SAVE PERSISTENCE DATA
 call fn_saveBaseData;
 //	DELETE NEARBY VEHICLES
-uiSleep 5;
+uiSleep 0.5;
+{deleteVehicle _x} forEach (player nearEntities [["LandVehicle", "Helicopter"], 200]);
+uiSleep 0.5;
 //	UNDEPLOY THE BASE
 //	LOAD PERSISTENCE DATA
 call fn_loadBaseData;
