@@ -252,6 +252,10 @@ fn_saveBaseVehicles = {
 		persist_containerMaster = [persist_masterMagArr,persist_masterItemArr,persist_masterWeaponsArr,persist_masterContainerArr];
 		//	ADD EACH CONTAINER ARRAY TO THE PRIMARY DATA ARRAY FOR THE COMPOSITION
 		(_vehAttributes select 4) set [2, persist_containerMaster];
+		//	SAVE FUEL, FUEL CARGO, HITPOINTS, VEHICLE AMMO
+		//	TODO: (_vehAttributes select 4) set [3, fuel _x];
+		//	TODO: (_vehAttributes select 4) set [4, VEHICLE_AMMO_FOR_EACH_WEAPON_HERE];
+		//	TODO: (_vehAttributes select 4) set [5, VEHICLE_HITPOINTS_FOR_EACH_PART_HERE];
 		//	PUSH INTO MASTER VEHICLE ARRAY FOR THIS BASE
 		_vehicleMasterArray pushBack _vehAttributes;
 	} forEach _baseVehicles;

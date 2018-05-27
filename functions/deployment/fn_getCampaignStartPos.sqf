@@ -92,4 +92,4 @@ if (surfaceIsWater _spawnPos) then {
 };
 
 //	TURN OFF ACDEP NOW THAT DEPLOYMENT HAS BEEN DONE.
-missionNamespace setVariable ["ACDEP_State", false, true];
+missionNamespace setVariable ["campaignState", false, true];

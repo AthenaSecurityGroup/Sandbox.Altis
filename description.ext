@@ -69,6 +69,7 @@ class cfgFunctions {
             class startFreightDelivery {};
             class sortFreightDelivery {};
             class initLogistics {};
+            class requestPlayerDelivery {};
             class startPlayerDelivery {};
             class submitFreightOrder {};
             class startVehicleDelivery {};
@@ -76,6 +77,9 @@ class cfgFunctions {
         class radio {
             class initRadioFunctions {};
             class initRadio {};
+        };
+        class persistence {
+            class getPlayerDBPos {};
         };
     };
     //	KILLZONE KID's FUNCTIONS, FOR GENERAL USAGE

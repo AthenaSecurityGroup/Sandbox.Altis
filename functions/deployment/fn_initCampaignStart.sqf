@@ -14,7 +14,7 @@ private ["_ACDEPadmin"];
 if (isServer) then {
 	if (profileNamespace getVariable ["ACDEP_DB", []] isEqualTo []) then {
 		//	NO SAVE STATE AVAILABLE, ENABLE ACDEP
-		missionNamespace setVariable ["ACDEP_State", true, true];
+		missionNamespace setVariable ["campaignState", true, true];
 
 		waitUntil {
 			//	LOCATE A RANKED PLAYER FROM THE PLAYER LIST, SET AS ACDEP ADMIN
@@ -30,6 +30,6 @@ if (isServer) then {
 		[_ACDEPadmin] remoteExec ["ASG_fnc_openCampaignUI", _ACDEPadmin];
 	} else {
 		//	LOADING AN EXISTING STATE
-		missionNamespace setVariable ["ACDEP_State", false, true];
+		missionNamespace setVariable ["campaignState", false, true];
 	};
 };

@@ -40,11 +40,20 @@ if (hasInterface) then {
 	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
 };
 
-//	SEND logistics CALL FOR HELICOPTER
-if !ACDEP_State then {
-	//	SEND TAXI REQUEST
-	logistics_reqPVEH = ["PDR", str _player];
-	publicVariableServer "logistics_reqPVEH";
+//	DETERMINE PLAYER RESPAWN TYPE
+//	TRUE	NEW CAMPAIGN
+//	FALSE	ACTIVE CAMPAIGN
+if !campaignState then {
+	//	CAMPAIGN IS ACTIVE, ASK SERVER IF PLAYER HAS STORED LOCATION?
+	_storedPos = player call ASG_fnc_getPlayerDBPos;
+	if (isNil {_storedPos}) then {
+		//	IF NO, SEND TAXI REQUEST
+		player call ASG_fnc_requestPlayerDelivery;
+	} else {
+		//	IF YES, SPAWN THERE
+		player setPos (getMarkerPos _storedPos);
+		[false, "", 4.5] call ASG_fnc_setPlayerState;
+	};
 } else {
 	//	ACDEP INITIALIZATION (CLIENT)
 	[] call ASG_fnc_initCampaignStart;

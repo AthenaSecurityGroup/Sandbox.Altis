@@ -9,10 +9,10 @@ if (isServer) then {
 	//	INIT PLAYER DISCONNECT EVENT HANDLER
 	call ASG_fnc_handlePlayerDisconnect;
 	
-	//	ACDEP INITIALIZATIOn (SERVER)
+	//	CAMPAIGN INITIALIZATION (SERVER)
 	call ASG_fnc_initCampaignStart;
 	
-	//	logistics QUEUE WATCHER
+	//	LOGISTICS REQUEST QUEUE MONITOR
 	call ASG_fnc_initLogistics;
 
 	//	INIT PLAYER DATABASE
@@ -21,19 +21,13 @@ if (isServer) then {
 		["DEL-J","76561198031485127",99,""],
 		["jmlane","76561197967188494",99,""]
 	];
-};
 
-//	DYNAMIC GROUPS - SERVER EXEC
-if (isServer) then {
-	// Initializes the Dynamic Groups framework and groups led by a player at mission start will be registered
-	["Initialize"] call BIS_fnc_dynamicGroups;
+	//	BIS DYNAMIC GROUPS INIT (SERVER-SIDE)
+	["Initialize"] call BIS_fnc_dynamicGroups;	
 };
 
 //	DYNAMIC GROUPS - CLIENT EXEC
-if (hasInterface) then {
-	// Initializes the player/client side Dynamic Groups framework and registers the player group
-	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
-};
+if (hasInterface) then {["InitializePlayer", [player]] call BIS_fnc_dynamicGroups};
 
 //	INITIALIZE DEPLOYMENT SYSTEM
 call ASG_fnc_initDeployment;
