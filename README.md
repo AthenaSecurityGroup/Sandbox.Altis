@@ -1,13 +1,19 @@
 # Athena Security Group Sandbox
 
-For more information about Athena Security Group:
-- http://www.athenasecuritygroup.com
-- http://www.reddit.com/r/athenasecuritygroup
+The Athena Security Group Sandbox is an Arma 3 multiplayer-enabled cooperative scenario set in programmatically generated environment, with a private military corporation theme. 
 
-Concept by [DEL-J]. Primary contributions by [Diffusion9] & [jmlane]
+For more information:
+- [Wiki]  
+- [Website]  
+- [Reddit]  
 
-Special Thanks To: [MosesUK].
+Concept by [DEL-J].  
+Primary contributions by [Diffusion9] & [jmlane].  
+Special thanks to: [MosesUK].  
 
+[Wiki]: https://github.com/AthenaSecurityGroup/Sandbox.Altis/wiki
+[Website]: http://www.athenasecuritygroup.com
+[Reddit]: http://www.reddit.com/r/athenasecuritygroup
 [DEL-J]: https://github.com/DEL-J
 [Diffusion9]: https://github.com/Diffusion9
 [jmlane]: https://github.com/jmlane

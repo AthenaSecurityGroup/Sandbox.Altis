@@ -6,24 +6,23 @@ enableEngineArtillery false;										//	Disable auto-calculated artillery.
 
 //	DEDICATED SERVER, OR PLAYER-HOST
 if (isServer) then {
+	//	INIT PLAYER DATABASE
+	call ASG_fnc_initPlayerDatabase;
+
+	//	INIT CAMPAIGN SEQUENCE (LOAD OR NEW)
+	call ASG_fnc_initCampaignStart;
+
 	//	INIT PLAYER DISCONNECT EVENT HANDLER
 	call ASG_fnc_handlePlayerDisconnect;
-	
-	//	CAMPAIGN INITIALIZATION (SERVER)
-	call ASG_fnc_initCampaignStart;
 	
 	//	LOGISTICS REQUEST QUEUE MONITOR
 	call ASG_fnc_initLogistics;
 
-	//	INIT PLAYER DATABASE
-	ASG_pDB = [
-		["Diffusion9","76561197972564938",99,""],
-		["DEL-J","76561198031485127",99,""],
-		["jmlane","76561197967188494",99,""]
-	];
-
 	//	BIS DYNAMIC GROUPS INIT (SERVER-SIDE)
-	["Initialize"] call BIS_fnc_dynamicGroups;	
+	["Initialize"] call BIS_fnc_dynamicGroups;
+
+	//	PERSISTENCE STATE SAVING
+	call ASG_fnc_scheduledStateSave;
 };
 
 //	DYNAMIC GROUPS - CLIENT EXEC

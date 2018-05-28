@@ -80,6 +80,19 @@ class cfgFunctions {
         };
         class persistence {
             class getPlayerDBPos {};
+            class initPlayerDatabase {};
+            class initPlayerSpawnType {};
+            class mergeToMaster {};
+            class processMerge {};
+            class processWeaponsItemsMags {};
+            class processSubContainers {};
+            class loadCargo {};
+            class saveBaseCargo {};
+            class saveBaseVehicles {};
+            class loadBaseVehicles {};
+            class saveBaseData {};
+            class loadBaseData {};
+            class scheduledStateSave {};
         };
     };
     //	KILLZONE KID's FUNCTIONS, FOR GENERAL USAGE

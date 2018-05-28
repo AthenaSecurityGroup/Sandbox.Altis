@@ -17,16 +17,15 @@ if (isNil "TOC_0") then {
 	_heloLZ = getMarkerPos "TOC_0_M";
 };
 _heloLZ = getPos (_heloLZ nearestObject "Land_HelipadSquare_F");
+if (_heloLZ isEqualTo [0,0,0]) then {_heloLZ = campaignStartPos};
+
 logistics_logHelipad = "Land_HelipadEmpty_F" createVehicle _heloLZ;
 logistics_logHelipad setDir (getDir (_heloLZ nearestObject "Land_HelipadSquare_F"));
-
-if (_heloLZ isEqualTo [0,0,0]) then {
-	_heloLZ = ACDEP_Pos;
-};
+logistics_logHelipad allowDamage false;
 
 //	CALC SPAWN DIRECTION, POSITION, HELO TYPE, AND TRANSPORT CAPACITY.
-_heloSpawnDir = [(worldSize / 2),(worldSize / 2)] getDir ACDEP_Pos;
-_heloPos = ACDEP_Pos getPos [2100, _heloSpawnDir];
+_heloSpawnDir = [(worldSize / 2),(worldSize / 2)] getDir campaignStartPos;
+_heloPos = campaignStartPos getPos [2100, _heloSpawnDir];
 _heloType = "B_Heli_Transport_03_black_F";
 _heloDir = _heloPos getDir _heloLZ;
 _cargoAvail = getNumber (configfile >> "CfgVehicles" >> _heloType >> "transportSoldier");

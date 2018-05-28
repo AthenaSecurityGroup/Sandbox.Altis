@@ -8,7 +8,7 @@
 params ["_player"];
 
 //	LOCATE EXISTING DATABASE ENTRY.
-_dbIndex = [ASG_pDB, getPlayerUID _player] call KK_fnc_findAll select 0 select 0;
+_dbIndex = [ASG_playerDatabase, getPlayerUID _player] call KK_fnc_findAll select 0 select 0;
 
 //	PROCESS THE DATABASE ENTRY ACCORDINGLY.
 private ["_playerRank"];
@@ -19,10 +19,10 @@ if isNil "_dbIndex" then {
 	_playerRank = 0;
 	_playerLoc = "";
 	_playerEntry = [_playerName, _playerUID, _playerRank, _playerLoc];
-	ASG_pDB pushback _playerEntry;
+	ASG_playerDatabase pushback _playerEntry;
 } else {
 	//	GRAB THE RANK FROM THE DATABASE.
-	_playerRank = ASG_pDB select _dbIndex select 2;
+	_playerRank = ASG_playerDatabase select _dbIndex select 2;
 };
 
 //	UPDATE THE SERVER AND THE PLAYER.
