@@ -1,7 +1,7 @@
 params ["_player", "_oldPlayer", "_respawn", "_respawnDelay"];
 
 //	WAIT FOR PLAYER TO INITIALIZE
-waitUntil {!(isNull player)};
+waitUntil {!(isNull _player)};
 
 //	DISABLE VOICE AND SUBS
 oldSubs = showSubtitles false;
@@ -9,8 +9,8 @@ _player setSpeaker "NoVoice";
 [_player, "NoVoice"] remoteExecCall ["setSpeaker", 0];
 
 //	ZERO VELOCITY, AND MOVE TO MAP CENTER
-player setVelocity [0,0,0];
-player setPos [(worldsize/2),((worldsize/2) + 1000),0];
+_player setVelocity [0,0,0];
+_player setPos [(worldsize/2),((worldsize/2) + 1000),0];
 
 //	DISABLE PLAYER FOR SPAWN PROCESS
 [true, "", 0.001] call ASG_fnc_setPlayerState;
@@ -37,7 +37,7 @@ showHUD [true, true, true, true, false, true, false, true];
 //	DYNAMIC GROUPS - CLIENT EXEC
 if (hasInterface) then {
 	// Initializes the player/client side Dynamic Groups framework and registers the player group
-	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
+	["InitializePlayer", [_player]] call BIS_fnc_dynamicGroups;
 };
 
 //	DETERMINE PLAYER RESPAWN TYPE
@@ -45,17 +45,18 @@ if (hasInterface) then {
 //	FALSE	ACTIVE CAMPAIGN
 if !campaignState then {
 	//	CAMPAIGN IS ACTIVE, ASK SERVER IF PLAYER HAS STORED LOCATION?
-	_storedPos = player call ASG_fnc_getPlayerDBPos;
-	if (isNil {_storedPos}) then {
+	_player remoteExec ["ASG_fnc_getPlayerDBPos", 2];
+	_storedPos = player getVariable ["ASG_playerDBPos", ""];
+	waitUntil {!isNil {_storedPos}};
+	if (_storedPos == "" || {isNil {_storedPos}}) then {
 		//	IF NO, SEND TAXI REQUEST
-		player call ASG_fnc_requestPlayerDelivery;
+		_player call ASG_fnc_requestPlayerDelivery;
 	} else {
 		//	IF YES, SPAWN THERE
-		player setPos (getMarkerPos _storedPos);
+		_player setPos (getMarkerPos _storedPos);
 		[false, "", 4.5] call ASG_fnc_setPlayerState;
 	};
 } else {
 	//	ACDEP INITIALIZATION (CLIENT)
 	[] call ASG_fnc_initCampaignStart;
 };
-
