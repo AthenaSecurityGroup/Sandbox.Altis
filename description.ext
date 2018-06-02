@@ -1,6 +1,6 @@
 //	DEBUG
-//  allowFunctionsLog = 1;
-//  allowFunctionsRecompile = 1;
+allowFunctionsLog = 1;
+allowFunctionsRecompile = 1;
 enableDebugConsole[] = {"76561197972564938", "76561198031485127", "76561197967188494"};
 
 //	GENERAL PARAMETERS
@@ -69,6 +69,7 @@ class cfgFunctions {
             class startFreightDelivery {};
             class sortFreightDelivery {};
             class initLogistics {};
+            class requestPlayerDelivery {};
             class startPlayerDelivery {};
             class submitFreightOrder {};
             class startVehicleDelivery {};
@@ -76,6 +77,22 @@ class cfgFunctions {
         class radio {
             class initRadioFunctions {};
             class initRadio {};
+        };
+        class persistence {
+            class getPlayerDBPos {};
+            class initPlayerDatabase {};
+            class initPlayerSpawnType {};
+            class mergeToMaster {};
+            class processMerge {};
+            class processWeaponsItemsMags {};
+            class processSubContainers {};
+            class loadCargo {};
+            class saveBaseCargo {};
+            class saveBaseVehicles {};
+            class loadBaseVehicles {};
+            class saveBaseData {};
+            class loadBaseData {};
+            class scheduledStateSave {};
         };
     };
     //	KILLZONE KID's FUNCTIONS, FOR GENERAL USAGE

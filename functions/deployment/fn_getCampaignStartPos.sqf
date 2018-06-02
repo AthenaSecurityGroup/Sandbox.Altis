@@ -11,8 +11,8 @@
 
 params ["_spawnPos"];
 
-//	BROADCAST ACDEP_Pos
-missionNamespace setVariable ["ACDEP_Pos", _spawnPos, true];
+//	BROADCAST campaignStartPos
+missionNamespace setVariable ["campaignStartPos", _spawnPos, true];
 
 //	EXECUTE BASED ON TERRAIN TYPE.
 if (surfaceIsWater _spawnPos) then {
@@ -91,5 +91,4 @@ if (surfaceIsWater _spawnPos) then {
 	} forEach allPlayers;
 };
 
-//	TURN OFF ACDEP NOW THAT DEPLOYMENT HAS BEEN DONE.
-missionNamespace setVariable ["ACDEP_State", false, true];
+missionNamespace setVariable ["ASG_serverReady", 1, true];

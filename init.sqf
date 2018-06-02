@@ -6,33 +6,23 @@ enableEngineArtillery false;										//	Disable auto-calculated artillery.
 
 //	DEDICATED SERVER, OR PLAYER-HOST
 if (isServer) then {
+	//	INIT PLAYER DATABASE
+	call ASG_fnc_initPlayerDatabase;
+
+	//	INIT CAMPAIGN SEQUENCE (LOAD OR NEW)
+	call ASG_fnc_initCampaignStart;
+
 	//	INIT PLAYER DISCONNECT EVENT HANDLER
 	call ASG_fnc_handlePlayerDisconnect;
 	
-	//	ACDEP INITIALIZATIOn (SERVER)
-	call ASG_fnc_initCampaignStart;
-	
-	//	logistics QUEUE WATCHER
+	//	LOGISTICS REQUEST QUEUE MONITOR
 	call ASG_fnc_initLogistics;
 
-	//	INIT PLAYER DATABASE
-	ASG_pDB = [
-		["Diffusion9","76561197972564938",99,""],
-		["DEL-J","76561198031485127",99,""],
-		["jmlane","76561197967188494",99,""]
-	];
-};
-
-//	DYNAMIC GROUPS - SERVER EXEC
-if (isServer) then {
-	// Initializes the Dynamic Groups framework and groups led by a player at mission start will be registered
+	//	BIS DYNAMIC GROUPS INIT (SERVER-SIDE)
 	["Initialize"] call BIS_fnc_dynamicGroups;
-};
 
-//	DYNAMIC GROUPS - CLIENT EXEC
-if (hasInterface) then {
-	// Initializes the player/client side Dynamic Groups framework and registers the player group
-	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
+	//	PERSISTENCE STATE SAVING
+	call ASG_fnc_scheduledStateSave;
 };
 
 //	INITIALIZE DEPLOYMENT SYSTEM

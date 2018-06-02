@@ -325,7 +325,7 @@ class logisticsdialog {
 				lineDistanceMin=2.9999999e-005;
 				lineLengthMin=5;
 			};
-			onButtonClick = "[_this] call ASG_fnc_submitFreightOrder; false";			
+			onButtonClick = "[_this] call ASG_fnc_submitFreightOrder; false";
 		};
 		class logisticsrscButtonMenuOK_cancel: logisticsrscButtonMenuOK_Submit {
 			text = "Cancel";

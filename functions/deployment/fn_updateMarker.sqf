@@ -15,16 +15,16 @@ if (_bMarkerArr isEqualTo []) exitWith {
 };
 
 //	TURN BASE MARKER REFERENCES INTO NUMERICS
-{
-	_bSortedArr pushback ([baseData, _x] call BIS_fnc_findNestedElement select 0);
-} forEach _bMarkerArr;
+if !(_bSortedArr isEqualTo []) then {
+	{_bSortedArr pushback ([baseData, _x] call BIS_fnc_findNestedElement select 0)} forEach _bMarkerArr;
 
-//	SORT THE ARRAY, SET PRIORITY BASE ALPHA 1
-_bSortedArr sort false;
-_bPriority = _bSortedArr deleteAt 0;
-([baseData select _bPriority select 2, "M"] joinString "_") setMarkerAlpha 1;
+	//	SORT THE ARRAY, SET PRIORITY BASE ALPHA 1
+	_bSortedArr sort false;
+	_bPriority = _bSortedArr deleteAt 0;
+	([baseData select _bPriority select 2, "M"] joinString "_") setMarkerAlpha 1;
 
-//	SET OTHER BASES TO 0
-{
-	([baseData select _x select 2, "M"] joinString "_") setMarkerAlpha 0;
-} forEach _bSortedArr;
+	//	SET OTHER BASES TO 0
+	{
+		([baseData select _x select 2, "M"] joinString "_") setMarkerAlpha 0;
+	} forEach _bSortedArr;
+};

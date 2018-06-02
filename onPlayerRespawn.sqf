@@ -1,7 +1,7 @@
 params ["_player", "_oldPlayer", "_respawn", "_respawnDelay"];
 
 //	WAIT FOR PLAYER TO INITIALIZE
-waitUntil {!(isNull player)};
+waitUntil {!(isNull _player)};
 
 //	DISABLE VOICE AND SUBS
 oldSubs = showSubtitles false;
@@ -9,8 +9,8 @@ _player setSpeaker "NoVoice";
 [_player, "NoVoice"] remoteExecCall ["setSpeaker", 0];
 
 //	ZERO VELOCITY, AND MOVE TO MAP CENTER
-player setVelocity [0,0,0];
-player setPos [(worldsize/2),((worldsize/2) + 1000),0];
+_player setVelocity [0,0,0];
+_player setPos [(worldsize/2),((worldsize/2) + 1000),0];
 
 //	DISABLE PLAYER FOR SPAWN PROCESS
 [true, "", 0.001] call ASG_fnc_setPlayerState;
@@ -34,19 +34,8 @@ call ASG_fnc_initMedical;
 //	DISABLE SQUAD COMMAND BAR, AND VEH DIRECTION UI
 showHUD [true, true, true, true, false, true, false, true];
 
-//	DYNAMIC GROUPS - CLIENT EXEC
-if (hasInterface) then {
-	// Initializes the player/client side Dynamic Groups framework and registers the player group
-	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;
-};
+//	INIT DYNAMIC GROUPS
+["InitializePlayer", [_player]] call BIS_fnc_dynamicGroups;
 
-//	SEND logistics CALL FOR HELICOPTER
-if !ACDEP_State then {
-	//	SEND TAXI REQUEST
-	logistics_reqPVEH = ["PDR", str _player];
-	publicVariableServer "logistics_reqPVEH";
-} else {
-	//	ACDEP INITIALIZATION (CLIENT)
-	[] call ASG_fnc_initCampaignStart;
-};
-
+//	DETERMINE PLAYER RESPAWN TYPE
+call ASG_fnc_initPlayerSpawnType;
