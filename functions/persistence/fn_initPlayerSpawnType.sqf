@@ -10,23 +10,24 @@
 
 */
 
+//	WAIT UNTIL THE SERVER IS READY, AND THEN DETERMINE SPAWN TYPE.
+waitUntil {(missionNamespace getVariable ["ASG_serverReady",0]) > 0};
 
-if (missionNamespace getVariable ["ASG_newCampaign", true]) then {
-	diag_log "NEW CAMPAIGN. WAIT FOR THE ADMIN TO ACT.";
-} else {
-	//	CAMPAIGN IS ACTIVE, ASK SERVER IF PLAYER HAS STORED LOCATION?
-	//	GET PLAYER POSITION FROM THE SERVER
-	_player remoteExec ["ASG_fnc_getPlayerDBPos", 2];
-	_storedPos = player getVariable ["ASG_playerDBPos", ""];
-	
-	//	WAIT FOR THE PLAYER TO RECEIVE THE POSITION
-	waitUntil {!isNil {_storedPos}};
-	if (_storedPos == "" || {isNil {_storedPos}}) then {
-		//	IF NO, SEND TAXI REQUEST
-		_player call ASG_fnc_requestPlayerDelivery;
-	} else {
-		//	IF YES, SPAWN THERE
-		_player setPos (getMarkerPos _storedPos);
-		[false, "", 4.5] call ASG_fnc_setPlayerState;
-	};	
+//	IS THERE A STORED POSITION FOR THIS PLAYER?
+_player remoteExec ["ASG_fnc_getPlayerDBPos", 2];
+_storedPos = player getVariable ["ASG_playerDBPos", ""];
+waitUntil {!isNil {_storedPos}};
+
+//	2 = EXISTING SERVER STATE, LOAD USER DATA.
+if (ASG_serverReady isEqualTo 2) then {
+	//	CHECK FOR SAVED POS, CALL TAXI OR RESPAWN
+	if (_storedPos isEqualTo "") then {_player call ASG_fnc_requestPlayerDelivery} else {
+		//	CHECK IF SAVED POS STILL VALID. ELSE TAXI
+		if !((getMarkerPos _storedPos) isEqualTo [0,0,0]) then {
+			_player setPos (getMarkerPos _storedPos);
+			[false, "", 4.5] call ASG_fnc_setPlayerState;
+		} else {
+			_player call ASG_fnc_requestPlayerDelivery;
+		};
+	};
 };

@@ -25,9 +25,6 @@ if (isServer) then {
 	call ASG_fnc_scheduledStateSave;
 };
 
-//	DYNAMIC GROUPS - CLIENT EXEC
-if (hasInterface) then {["InitializePlayer", [player]] call BIS_fnc_dynamicGroups};
-
 //	INITIALIZE DEPLOYMENT SYSTEM
 call ASG_fnc_initDeployment;
 

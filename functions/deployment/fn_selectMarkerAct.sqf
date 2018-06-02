@@ -14,11 +14,17 @@
 
 */
 
-params ["_bIndex", "_rType", "_bPos"];
+params [["_bIndex",-1], ["_rType",""], ["_bPos",[]],["_bDir",-1]];
 
-(baseData select _bIndex select 2) params ["_bComp"];
-(baseData select _bIndex select 3) params ["_mType", "_mColour", "_mText"];
-_bMarker = format ["%1_M", _bComp];
+private ["_bComp","_bMarker","_mType", "_mColour", "_mText"];
+if !(_bIndex isEqualTo -1) then {
+	_bComp = (baseData select _bIndex select 2);
+	_bMarker = format ["%1_M", _bComp];
+	_markerData = (baseData select _bIndex select 3);
+	_mType = _markerData select 0;
+	_mColour = _markerData select 1;
+	_mText = _markerData select 2;
+};
 
 switch (toUpper _rType) do {
     case "CREATE": {
@@ -27,6 +33,7 @@ switch (toUpper _rType) do {
 		_markerstr setMarkerColor _mColour;
 		_markerstr setMarkerText _mText;
 		_markerstr setMarkerAlpha 1;
+		[_markerstr, _bDir] remoteExec ["setMarkerDirLocal", 2]; // _markerstr setMarkerDirLocal _bDir;
 	};
     case "DELETE": {
 		deleteMarker _bMarker;
@@ -39,3 +46,4 @@ switch (toUpper _rType) do {
 		diag_log format ["[selectMarkerAct]:	DEFAULT SWITCH"];
 	};
 };
+

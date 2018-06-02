@@ -91,5 +91,4 @@ if (surfaceIsWater _spawnPos) then {
 	} forEach allPlayers;
 };
 
-//	TURN OFF ACDEP NOW THAT DEPLOYMENT HAS BEEN DONE.
-missionNamespace setVariable ["ASG_newCampaign", false, true];
+missionNamespace setVariable ["ASG_serverReady", 1, true];

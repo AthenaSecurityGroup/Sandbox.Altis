@@ -50,11 +50,11 @@ VoN_EventIn_fnc = {
 	[_VoN_srcObj, _spkr] spawn {
 		params ["_VoN_srcObj", "_spkr"];
 		private ["_distance", "_staticLevel"];
-		diag_log format ["radio_initFunctions:	_VoN_srcObj: 	%1", _VoN_srcObj];
-		diag_log format ["radio_initFunctions:	_spkr: 			%1", _spkr];
+		//	diag_log format ["radio_initFunctions:	_VoN_srcObj: 	%1", _VoN_srcObj];
+		//	diag_log format ["radio_initFunctions:	_spkr: 			%1", _spkr];
 		while {!isNull _VoN_srcObj} do {
 			_distance = player distance _spkr;
-			diag_log format ["radio_initFunctions:	_distance: 		%1", _distance];
+			//	diag_log format ["radio_initFunctions:	_distance: 		%1", _distance];
 			switch true do {
 				case (_distance <= 200) : {_staticLevel = ["radionoise1_1", "radionoise1_2", "radionoise1_3"]};
 				case (_distance >= 201 && _distance <= 400) : {_staticLevel = ["radionoise2_1", "radionoise2_2", "radionoise2_3"]};

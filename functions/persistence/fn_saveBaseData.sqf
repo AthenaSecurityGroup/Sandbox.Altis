@@ -11,7 +11,9 @@
 			//	MARKER IS ACTIVE, START GATHERING PERSISTENCE
 			//	GET POSITION
 			_baseDeployPos = getMarkerPos _markerName;
-			_x set [4, _baseDeployPos];
+			_baseDeployDir = markerDir _markerName;
+			(_x select 4) set [0, _baseDeployPos];
+			(_x select 4) set [1, _baseDeployDir];
 			//	GET CARGO
 			_x call ASG_fnc_saveBaseCargo;
 			//	GET VEHICLES
@@ -19,6 +21,11 @@
 		};
 	};
 } forEach baseData;
+
+//	SAVE PLAYER POSITIONS
+{[_x, getPlayerUID _x, false] call ASG_fnc_savePlayerLoc} forEach allPlayers;
+
 //	SAVE TO SERVER PROFILE NAMESPACE
 profileNamespace setVariable ["baseData", baseData];
+profileNamespace setVariable ["ASG_playerDatabase", ASG_playerDatabase];
 saveProfileNamespace;

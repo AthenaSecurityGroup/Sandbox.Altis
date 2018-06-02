@@ -6,17 +6,20 @@
 */
 
 //	RUN ON SERVER: CHECK FOR EXISTING STATE
-
 _existingData = (profileNamespace getVariable "baseData");
+_existingPlayerData = (profileNamespace getVariable "ASG_playerDatabase");
 
+//	SET ACTIVE PLAYER DATABASE FROM PROFILE SAVED DATA
+if (!isNil{_existingPlayerData}) then {ASG_playerDatabase = _existingPlayerData};
+
+//	LOAD BASE DATABASE
 if (!isNil {_existingData}) then {
-	//	LOAD EXISTING DATA
-	missionNamespace setVariable ["baseData", _existingData];
-	//	SET CAMPAIGN STATE TO ACTIVE
-	missionNamespace setVariable ["ASG_newCampaign", false, true];
+	//	SET ACTIVE BASEDATA TO SAVED BASEDATA
+	baseData = _existingData;
+	//	LOAD BASE DATA
+	call ASG_fnc_loadBaseData;
 } else {
 	//	NO SAVE STATE AVAILABLE, OPEN CAMPAIGN START GUI
-	missionNamespace setVariable ["ASG_newCampaign", true, true];
 	//	RUN UNTIL A RANKED PLAYER CAN BE LOCATED:
 	private ["_campaignAdmin"];
 	waitUntil {
