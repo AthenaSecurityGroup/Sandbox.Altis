@@ -35,5 +35,6 @@ orbat = [
 	]]
 ];
 if (isServer) then {
+    IndiCasualties = [];
 	output = [orbat] call SimTools_ForceDeployment_fnc_deployForce;
 };
