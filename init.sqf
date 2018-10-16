@@ -1,4 +1,4 @@
-orbat = [
+_orbat = [
 	["II", [], [
 		["I", [], [
 			["•••", [], []],
@@ -36,5 +36,5 @@ orbat = [
 ];
 if (isServer) then {
     IndiCasualties = [];
-	output = [orbat] call SimTools_ForceDeployment_fnc_deployForce;
+    output = [_orbat] call SimTools_ForceDeployment_fnc_deployForce;
 };
