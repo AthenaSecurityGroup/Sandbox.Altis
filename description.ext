@@ -1,0 +1,18 @@
+class CfgFunctions {
+	#include "SimTools\ForceDeployment\SimTools_ForceDeployment.cpp"
+	#include "LARs\LARs_spawnComp.cpp"
+};
+
+LARs_spawnComp_debug = 0; //1 = RPT output, 2 = RPT output and ingame visual positioning info
+
+class CfgCompositions {
+	class PB {
+		#include "Compositions\AAFIPB.sqe"
+	};
+	class COP {
+		#include "Compositions\AAFICOP.sqe"
+	};
+	class FOB {
+		#include "Compositions\AAFIFOB.sqe"
+	};
+};
