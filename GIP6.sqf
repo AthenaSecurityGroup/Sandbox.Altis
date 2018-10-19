@@ -24,6 +24,11 @@ _trigger spawn {
 	_G3 = [_Base, INDEPENDENT, ["I_Soldier_SL_F","I_soldier_F","I_Soldier_AR_F","I_soldier_F"],[],["SERGEANT","PRIVATE","PRIVATE","PRIVATE"],[],[],[],180] call BIS_fnc_spawnGroup;
 	Sleep 1;
 
+	_HQ enabledynamicsimulation true;
+	_G1 enabledynamicsimulation true;
+	_G2 enabledynamicsimulation true;
+	_G3 enabledynamicsimulation true;
+
 	_PL = leader _HQ;
 	_L1 = leader _G1;
 

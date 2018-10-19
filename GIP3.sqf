@@ -16,6 +16,11 @@ Sleep 1;
 _G3 = [_Rally, INDEPENDENT, ["I_Soldier_TL_F","I_soldier_F","I_soldier_F","I_Soldier_SL_F","I_Soldier_AR_F","I_Soldier_AR_F","I_Soldier_GL_F","I_soldier_F"],[],[],[],[],[],180] call BIS_fnc_spawnGroup;
 Sleep 1;
 
+_HQ enabledynamicsimulation true;
+_G1 enabledynamicsimulation true;
+_G2 enabledynamicsimulation true;
+_G3 enabledynamicsimulation true;
+
 _PL = leader _HQ;
 _L1 = leader _G1;
 _L2 = leader _G2;

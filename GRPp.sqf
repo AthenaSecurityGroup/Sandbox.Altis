@@ -19,6 +19,14 @@ _trigger spawn {
 	_G6 = [(_this getpos [100,180]), INDEPENDENT, ["I_Soldier_SL_F","I_soldier_F","I_soldier_F","I_medic_F"],[],["SERGEANT","PRIVATE","PRIVATE","PRIVATE"],[],[],[],180] call BIS_fnc_spawnGroup;
 	Sleep 1;
 
+	_HQ enabledynamicsimulation true;
+	_G1 enabledynamicsimulation true;
+	_G2 enabledynamicsimulation true;
+	_G3 enabledynamicsimulation true;
+	_G4 enabledynamicsimulation true;
+	_G5 enabledynamicsimulation true;
+	_G6 enabledynamicsimulation true;
+
 	{
 		{
 			_gearhandle = _x execvm "Gear\AAF.sqf";
