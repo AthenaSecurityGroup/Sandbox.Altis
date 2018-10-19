@@ -37,4 +37,5 @@ _orbat = [
 if (isServer) then {
     IndiCasualties = [];
     output = [_orbat] call SimTools_ForceDeployment_fnc_deployForce;
+    ExecVM "HeadlessBalance.sqf";
 };
