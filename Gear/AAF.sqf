@@ -15,41 +15,6 @@ private _carbine = (selectrandom ["arifle_Mk20C_F","arifle_Mk20C_plain_F"]);
 private _launcher = (selectrandom ["arifle_Mk20_GL_F","arifle_Mk20_GL_plain_F"]);
 private _marksman = (selectrandom ["arifle_Mk20_F","arifle_Mk20_plain_F"]);
 
-// TODO: delete this array when done with example.
-private _example = [
-	[
-		"arifle_MX_GL_F","muzzle_snds_H","acc_pointer_IR","optic_Aco",    //Primary weapon, (weapon items) silencer, pointer, optic
-		["30Rnd_65x39_caseless_mag",30],    //Loaded mag in primary muzzle, ammo count
-		["1Rnd_HE_Grenade_shell",1],     //Loaded mag in secondary muzzle, ammo count
-		""     //Bipod
-	],
-	[],     //Secondary weapon info (see primary above)
-	[     //handGun info (see primary above)
-		"hgun_P07_F","","","",
-		["16Rnd_9x21_Mag",16],
-		[],
-		""
-	],
-	[     //Uniform
-		"U_B_CombatUniform_mcam",     //Uniform Type
-		[     //Uniform Items
-			["FirstAidKit",1],     //Type, count
-			["30Rnd_65x39_caseless_mag",30,2]
-		]     //Magazines are Type, ammo, count - Arma version 1.64> is Type, count, ammo
-	],
-	[     //Vest Info
-		"V_PlateCarrierGL_rgr",     //Vest Type
-		[     //Vest Items
-			["30Rnd_65x39_caseless_mag",30,3]
-		]
-	],
-	[],     //Backpack Info (follows same layout as above for Uniform and Vest
-	"H_HelmetSpecB_blk",     //Helmet
-	"G_Tactical_Clear",     //Facewear glasses/bandanna etc
-	["Binocular","","","",[],[],""],     //Weapon Binocular (follows same layout as other weapons above)
-	["ItemMap","ItemGPS","ItemRadio","ItemCompass","ItemWatch","NVGoggles"]    //AssignedItems ItemGPS can also be a UAV Terminal .
-];
-
 // https://community.bistudio.com/wiki/Unit_Loadout_Array
 // TODO: Use the randomized class names assigned above and drop them in.
 // TODO: Additional base loadouts. Anything that's common to a set of vehicle classes should be defined once upfront.
@@ -74,70 +39,41 @@ private _baseLoadout = [
 	_baseLoadoutItems
 ];
 
-private _loadout = switch (typeOf _obj) do {
+private _baseSpecOpsLoadout = [
+	_baseLoadoutPrimaryWeapon,
+	[],
+	[],
+	["U_I_GhillieSuit", []],
+	["V_PlateCarrierIA1_dgtl", +(_baseLoadoutVest # 1)],
+	_baseLoadoutBackpack,
+	_baseLoadoutHelmet,
+	"",
+	[],
+	["", "", "", "", "", "NVGoggles_INDEP"]
+];
 
-	// TODO: Apply these changes to all the vehicle classes that need specific overrides.
-	case "I_Soldier_AR_F": {
-		[
-			["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""],
-			[],
-			[],
-			_baseLoadoutUniform,
-			[_vest, [["200Rnd_556x45_Box_F", 3, 200], ["SmokeShell", 4, 1]]],
-			_baseLoadoutBackpack,
-			_baseLoadoutHelmet,
-			_baseLoadoutGoggles,
-			[],
-			_baseLoadoutItems
-		]
+private _loadout = switch (typeOf _obj) do {
+	case "I_G_Soldier_F": {
+		_baseSpecOpsLoadout
 	};
 
 	case "I_G_medic_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		_obj addItemToBackpack "Medikit";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout # 5 # 1 pushback "Medikit";
+		_loadout
 	};
 
 	case "I_G_officer_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		for "_i" from 1 to 2 do {_obj addItemToVest "SmokeShellYellow";};
-		for "_i" from 1 to 2 do {_obj addItemToVest "SmokeShellGreen";};
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout # 4 # 1 + [["SmokeShellYellow", 2, 1], ["SmokeShellGreen", 2, 1]]];
+		_loadout
 	};
 
 	case "I_G_Soldier_AR_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 3 do {_obj addItemToVest "200Rnd_556x45_Box_F";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon "LMG_03_F";
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_G_Soldier_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout set [0, ["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""]];
+		_loadout # 4 set [1, [["200Rnd_556x45_Box_F", 3, 200], ["SmokeShell", 4, 1]]];
+		_loadout
 	};
 
 	case "I_G_Soldier_GL_F": {
@@ -354,14 +290,18 @@ private _loadout = switch (typeOf _obj) do {
 	};
 
 	case "I_Soldier_AR_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 3 do {_obj addItemToVest "200Rnd_556x45_Box_F";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon "LMG_03_F";
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		[
+			["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""],
+			[],
+			[],
+			_baseLoadoutUniform,
+			[_vest, [["200Rnd_556x45_Box_F", 3, 200], ["SmokeShell", 4, 1]]],
+			_baseLoadoutBackpack,
+			_baseLoadoutHelmet,
+			_baseLoadoutGoggles,
+			[],
+			_baseLoadoutItems
+		]
 	};
 
 	case "I_Soldier_AT_F": {
@@ -520,5 +460,6 @@ private _loadout = switch (typeOf _obj) do {
 	default { _baseLoadout };
 };
 
+//[_obj, _loadout] remoteExec ["setUnitLoadout", _obj, false];
 _obj setUnitLoadout _loadout;
 _loadout
