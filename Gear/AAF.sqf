@@ -59,6 +59,7 @@ private _baseLoadoutVest = [_vest, [["30Rnd_556x45_Stanag_green", 8, 30], ["Smok
 private _baseLoadoutBackpack = [_pack, []];
 private _baseLoadoutHelmet = "H_HelmetIA";
 private _baseLoadoutGoggles = _goggles;
+private _baseLoadoutItems = ["", "", "", "", "", ""];
 
 private _baseLoadout = [
 	_baseLoadoutPrimaryWeapon,
@@ -70,7 +71,7 @@ private _baseLoadout = [
 	_baseLoadoutHelmet,
 	_baseLoadoutGoggles,
 	[],
-	[]
+	_baseLoadoutItems
 ];
 
 	// TODO: delete
@@ -101,7 +102,7 @@ switch (typeof _obj) do {
 			_baseLoadoutHelmet,
 			_baseLoadoutGoggles,
 			[],
-			[]
+			_baseLoadoutItems
 		];
 		// TODO: Delete old way below when done with example.
 		// _obj forceAddUniform _uniform;
