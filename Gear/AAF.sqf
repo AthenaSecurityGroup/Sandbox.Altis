@@ -74,25 +74,11 @@ private _baseLoadout = [
 	_baseLoadoutItems
 ];
 
-	// TODO: delete
-	case "I_G_Soldier_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-	// ^^^
-
-private _loadout;
-switch (typeof _obj) do {
+private _loadout = switch (typeOf _obj) do {
 
 	// TODO: Apply these changes to all the vehicle classes that need specific overrides.
 	case "I_Soldier_AR_F": {
-		_loadout = [
+		[
 			["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""],
 			[],
 			[],
@@ -103,16 +89,7 @@ switch (typeof _obj) do {
 			_baseLoadoutGoggles,
 			[],
 			_baseLoadoutItems
-		];
-		// TODO: Delete old way below when done with example.
-		// _obj forceAddUniform _uniform;
-		// _obj addVest _vest;
-		// _obj addHeadgear "H_HelmetIA";
-		// _obj addGoggles _goggles;
-		// for "_i" from 1 to 3 do {_obj addItemToVest "200Rnd_556x45_Box_F";};
-		// for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		// _obj addWeapon "LMG_03_F";
-		// _obj addPrimaryWeaponItem "optic_ACO_grn";
+		]
 	};
 
 	case "I_G_medic_F": {
@@ -540,9 +517,7 @@ switch (typeof _obj) do {
 		_obj addPrimaryWeaponItem "optic_ACO_grn";
 	};
 
-	default {
-		_loadout = _baseLoadout;
-	};
+	default { _baseLoadout };
 };
 
 _obj setUnitLoadout _loadout;
