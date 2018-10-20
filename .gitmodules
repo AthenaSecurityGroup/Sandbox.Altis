@@ -1,0 +1,6 @@
+[submodule "SimTools-ForceDeployment"]
+	path = SimTools/ForceDeployment
+	url = https://github.com/jmlane/force-deployment
+[submodule "SimTools-Compositions"]
+	path = SimTools/Compositions
+	url = https://github.com/jmlane/SimTools-Compositions
