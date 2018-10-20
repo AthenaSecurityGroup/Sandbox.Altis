@@ -89,7 +89,7 @@ private _loadout = switch (typeOf _obj) do {
 	case "I_Soldier_AR_F": {
 		private _loadout = +_baseLoadout;
 		_loadout set [0, ["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""]];
-		_loadout # 3 set [1, [["SmokeShell", 4, 1]]]
+		_loadout # 3 set [1, [["SmokeShell", 4, 1]]];
 		_loadout # 4 set [1, [["200Rnd_556x45_Box_F", 3, 200]]];
 		_loadout
 	};
@@ -97,7 +97,7 @@ private _loadout = switch (typeOf _obj) do {
 	case "I_G_Soldier_AR_F": {
 		private _loadout = +_baseSpecOpsLoadout;
 		_loadout set [0, ["LMG_03_F", "", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""]];
-		_loadout # 3 set [1, [["SmokeShell", 4, 1]]]
+		_loadout # 3 set [1, [["SmokeShell", 4, 1]]];
 		_loadout # 4 set [1, [["200Rnd_556x45_Box_F", 3, 200]]];
 		_loadout
 	};
@@ -105,7 +105,7 @@ private _loadout = switch (typeOf _obj) do {
 	case "I_Soldier_SL_F": {
 		private _loadout = +_baseLoadout;
 		_loadout set [0, [_launcher, "", "", "optic_ACO_grn", ["30Rnd_556x45_Stanag_green", 30], ["1Rnd_HE_Grenade_shell", 1], ""]];
-		_loadout # 4 # 1 = [["1Rnd_HE_Grenade_shell", 4, 1], ["1Rnd_Smoke_Grenade_shell", 4, 1]];
+		_loadout # 4 # 1 + [["1Rnd_HE_Grenade_shell", 4, 1], ["1Rnd_Smoke_Grenade_shell", 4, 1]];
 		_loadout
 	};
 
