@@ -1,5 +1,5 @@
-param [
-	["_obj", objNull, [objNull]
+params [
+	["_obj", objNull, [objNull]]
 ];
 
 if (isNull _obj) exitWith { ["Invalid Argument: must provide valid object"] call BIS_fnc_error};
