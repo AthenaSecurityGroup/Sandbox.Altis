@@ -65,7 +65,7 @@ private _loadout = switch (typeOf _obj) do {
 
 	case "I_G_officer_F": {
 		private _loadout = +_baseSpecOpsLoadout;
-		_loadout # 4 # 1 + [["SmokeShellYellow", 2, 1], ["SmokeShellGreen", 2, 1]]];
+		_loadout # 4 # 1 + [["SmokeShellYellow", 2, 1], ["SmokeShellGreen", 2, 1]];
 		_loadout
 	};
 
