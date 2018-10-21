@@ -105,7 +105,7 @@ private _loadout = switch (typeOf _obj) do {
 	case "I_Soldier_lite_F": {
 		private _loadout = +_baseLoadout;
 		_loadout set [0, ["LMG_Zafir_F", "", "", "optic_ACO_grn", ["150Rnd_762x54_Box", 150], [], ""]];
-		_loadout # 4 set [1, [["150Rnd_762x54_Box", 150, 4]]];
+		_loadout # 4 set [1, [["150Rnd_762x54_Box", 4, 150]];
 		_loadout
 	};
 
@@ -233,9 +233,9 @@ private _loadout = switch (typeOf _obj) do {
 			["LMG_03_F", "muzzle_snds_M", "", "optic_ACO_grn", ["200Rnd_556x45_Box_F", 200], [], ""],
 			[],
 			[],
-			["U_I_Wetsuit", [["200Rnd_556x45_Box_F", 200, 1], ["SmokeShell", 4, 1]]],
+			["U_I_Wetsuit", [["200Rnd_556x45_Box_F", 1, 200], ["SmokeShell", 4, 1]]],
 			["V_RebreatherIA", []],
-			["B_AssaultPack_blk", [["200Rnd_556x45_Box_F", 200, 4]]],
+			["B_AssaultPack_blk", [["200Rnd_556x45_Box_F", 4, 200]]],
 			"",
 			"G_I_Diving",
 			[],
