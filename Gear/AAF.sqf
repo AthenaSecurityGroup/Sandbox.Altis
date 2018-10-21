@@ -105,7 +105,7 @@ private _loadout = switch (typeOf _obj) do {
 	case "I_Soldier_lite_F": {
 		private _loadout = +_baseLoadout;
 		_loadout set [0, ["LMG_Zafir_F", "", "", "optic_ACO_grn", ["150Rnd_762x54_Box", 150], [], ""]];
-		_loadout # 4 set [1, [["150Rnd_762x54_Box", 4, 150]];
+		_loadout # 4 set [1, [["150Rnd_762x54_Box", 4, 150]]];
 		_loadout
 	};
 
