@@ -102,6 +102,13 @@ private _loadout = switch (typeOf _obj) do {
 		_loadout
 	};
 
+	case "I_Soldier_lite_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [0, ["LMG_Zafir_F", "", "", "optic_ACO_grn", ["150Rnd_762x54_Box", 150], [], ""]];
+		_loadout # 4 set [1, [["150Rnd_762x54_Box", 150, 4]]];
+		_loadout
+	};
+
 	case "I_Soldier_SL_F": {
 		private _loadout = +_baseLoadout;
 		_loadout set [0, [_launcher, "", "", "optic_ACO_grn", ["30Rnd_556x45_Stanag_green", 30], ["1Rnd_HE_Grenade_shell", 1], ""]];
@@ -121,42 +128,81 @@ private _loadout = switch (typeOf _obj) do {
 		_loadout
 	};
 
+	case "I_Soldier_GL_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [1, ["launch_RPG7_F", "", "", "", ["RPG7_F", 1], [], ""]];
+		_loadout # 5 # 1 pushback ["RPG7_F", 4, 1];
+		_loadout
+	};
+
 	case "I_G_Soldier_GL_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "1Rnd_HE_Grenade_shell";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "1Rnd_Smoke_Grenade_shell";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _launcher;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout set [0, [_launcher, "", "", "optic_ACO_grn", ["30Rnd_556x45_Stanag_green", 30], ["1Rnd_HE_Grenade_shell", 1], ""]];
+		_loadout # 4 # 1 + [["1Rnd_HE_Grenade_shell", 4, 1], ["1Rnd_Smoke_Grenade_shell", 4, 1]];
+		_loadout
+	};
+
+	case "I_Soldier_LAT_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [1, ["launch_NLAW_F", "", "", "", ["NLAW_F", 1], [], ""]];
+		_loadout # 5 # 1 pushBack ["NLAW_F", 2, 1];
+		_loadout
 	};
 
 	case "I_G_Soldier_LAT_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		for "_i" from 1 to 2 do {_obj addItemToBackpack "NLAW_F";};
-		_obj addWeapon "launch_NLAW_F";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout set [1, ["launch_NLAW_F", "", "", "", ["NLAW_F", 1], [], ""]];
+		_loadout # 5 # 1 pushBack ["NLAW_F", 2, 1];
+		_loadout
+	};
+
+	case "I_Soldier_AT_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [1, ["launch_B_Titan_short_tna_F", "", "", "", ["Titan_AT", 1], [], ""]];
+		_loadout # 5 # 1 + [["Titan_AP", 1, 1], ["Titan_AT", 1, 1]];
+		_loadout
+	};
+
+	case "I_Soldier_AA_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [1, ["launch_B_Titan_tna_F", "", "", "", ["Titan_AA", 1], [], ""]];
+		_loadout # 5 # 1 + [["Titan_AA", 1, 1]];
+		_loadout
+	};
+
+	case "I_Soldier_M_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [0, [_marksman, "", "", "optic_MRCO", ["30Rnd_556x45_Stanag_green", 30], [], ""]];
+		_loadout
 	};
 
 	case "I_G_Soldier_M_F": {
-		_obj forceAddUniform "U_I_GhillieSuit";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _marksman;
-		_obj addPrimaryWeaponItem "optic_MRCO";
+		private _loadout = +_baseSpecOpsLoadout;
+		_loadout set [0, [_marksman, "", "", "optic_MRCO", ["30Rnd_556x45_Stanag_green", 30], [], ""]];
+		_loadout
+	};
+
+	case "I_Sniper_F": {
+		[
+			["srifle_LRR_F", "", "", "optic_KHS_blk", ["7Rnd_408_Mag", 7], [], ""],
+			[],
+			["hgun_P07_F", "", "", "", ["16Rnd_9x21_Mag", 16], [], ""],
+			["U_I_FullGhillie_sard", [["16Rnd_9x21_Mag", 4, 16], ["SmokeShell", 2, 1]]],
+			["V_PlateCarrierIA1_dgtl", [["7Rnd_408_Mag", 8, 7], ["SmokeShell", 2, 1]]],
+			[],
+			_baseLoadoutHelmet,
+			"",
+			[],
+			["", "", "", "", "", "NVGoggles_INDEP"]
+		]
+	};
+
+	case "I_Spotter_F": {
+		private _loadout = +_baseLoadout;
+		_loadout set [3, ["U_I_FullGhillie_sard", []]];
+		_loadout # 4 set [0, "V_PlateCarrierIA1_dgtl"];
+		_loadout set [9, ["", "", "", "", "", "NVGoggles_INDEP"]];
+		_loadout
 	};
 
 	case "I_crew_F": {
@@ -256,48 +302,6 @@ private _loadout = switch (typeOf _obj) do {
 		_obj addWeapon "arifle_Mk20C_plain_F";
 	};
 
-	case "I_Sniper_F": {
-		_obj forceAddUniform "U_I_FullGhillie_sard";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "7Rnd_408_Mag";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "16Rnd_9x21_Mag";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon "srifle_LRR_F";
-		_obj addWeapon "hgun_P07_F";
-		_obj addPrimaryWeaponItem "optic_KHS_blk";
-	};
-
-	case "I_Soldier_AA_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		_obj addItemToBackpack "Titan_AA";
-		_obj addWeapon "launch_B_Titan_tna_F";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_Soldier_AT_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		_obj addItemToBackpack "Titan_AP";
-		_obj addItemToBackpack "Titan_AT";
-		_obj addWeapon "launch_B_Titan_short_tna_F";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
 	case "I_Soldier_exp_F": {
 		_obj forceAddUniform _uniform;
 		_obj addVest _vest;
@@ -311,55 +315,6 @@ private _loadout = switch (typeOf _obj) do {
 		for "_i" from 1 to 3 do {_obj addItemToBackpack "DemoCharge_Remote_Mag";};
 		_obj addWeapon _carbine;
 		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_Soldier_GL_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		for "_i" from 1 to 2 do {_obj addItemToBackpack "RPG7_F";};
-		_obj addWeapon "launch_RPG7_F";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_Soldier_LAT_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addBackpack _pack;
-		for "_i" from 1 to 4 do {_obj addItemToBackpack "NLAW_F";};
-		_obj addWeapon "launch_NLAW_F";
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_Soldier_lite_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 4 do {_obj addItemToVest "150Rnd_762x54_Box";};
-		_obj addWeapon "LMG_Zafir_F";
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
-	};
-
-	case "I_Soldier_M_F": {
-		_obj forceAddUniform _uniform;
-		_obj addVest _vest;
-		_obj addHeadgear "H_HelmetIA";
-		_obj addGoggles _goggles;
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _marksman;
-		_obj addPrimaryWeaponItem "optic_MRCO";
 	};
 
 	case "I_Soldier_repair_F": {
@@ -387,17 +342,6 @@ private _loadout = switch (typeOf _obj) do {
 		_obj linkItem "I_UavTerminal";
 		_obj addBackpack "I_UAV_01_backpack_F";
 
-	};
-
-	case "I_Spotter_F": {
-		_obj forceAddUniform "U_I_FullGhillie_sard";
-		_obj addVest "V_PlateCarrierIA1_dgtl";
-		_obj addHeadgear "H_HelmetIA";
-		_obj linkItem "NVGoggles_INDEP";
-		for "_i" from 1 to 8 do {_obj addItemToVest "30Rnd_556x45_Stanag_green";};
-		for "_i" from 1 to 4 do {_obj addItemToVest "SmokeShell";};
-		_obj addWeapon _carbine;
-		_obj addPrimaryWeaponItem "optic_ACO_grn";
 	};
 
 	default { _baseLoadout };
