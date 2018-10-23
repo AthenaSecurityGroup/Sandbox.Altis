@@ -28,3 +28,149 @@ Radio Channels:
 
 Disablechannels[] = {1, 2, 4, 6};
 Skiplobby = 1;
+
+class CfgORBAT {
+	class BaseGreek {
+		commander = "GreekMen";
+		side = "Resistance";
+		tags[] = {"Greek", "AAF"};
+	};
+
+	class GreekBattalion : BaseGreek {
+		id = 1;
+		idType = 0;
+		size = "Battalion";
+		type = "Infantry";
+		composition = "Compositions\AAFIFOB.sqe";
+		deploy = 1;
+	};
+
+	class GreekCompany : BaseGreek {
+		id = 1;
+		idType = 2;
+		size = "Company";
+		type = "Infantry";
+		composition = "Compositions\AAFICOP.sqe";
+		deploy = 1;
+	};
+
+	class GreekPlatoon : BaseGreek {
+		id = 1;
+		idType = 0;
+		size = "Platoon";
+		type = "Infantry";
+		composition = "Compositions\AAFIPB.sqe";
+		deploy = 1;
+	};
+
+	class GreekBrigade : BaseGreek {
+		id = 1;
+		idType = 0;
+		size = "Brigade";
+		type = "Infantry";
+
+		class Greek1 : GreekBattalion {
+			id = 1;
+
+			class Greek1A : GreekCompany {
+				id = 1;
+
+				class Greek1A1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek1A2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek1A3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+
+			class Greek1B : GreekCompany {
+				id = 2;
+
+				class Greek1B1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek1B2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek1B3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+
+			class Greek1C : GreekCompany {
+				id = 3;
+
+				class Greek1C1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek1C2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek1C3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+		};
+
+		class Greek2 : GreekBattalion {
+			id = 2;
+
+			class Greek2A : GreekCompany {
+				id = 1;
+
+				class Greek2A1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek2A2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek2A3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+
+			class Greek2B : GreekCompany {
+				id = 2;
+
+				class Greek2B1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek2B2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek2B3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+
+			class Greek2C : GreekCompany {
+				id = 3;
+
+				class Greek2C1 : GreekPlatoon {
+					id = 1;
+				};
+
+				class Greek2C2 : GreekPlatoon {
+					id = 2;
+				};
+
+				class Greek2C3 : GreekPlatoon {
+					id = 3;
+				};
+			};
+		};
+	};
+};
