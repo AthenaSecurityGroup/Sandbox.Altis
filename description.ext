@@ -1,6 +1,11 @@
 class CfgFunctions {
 	#include "SimTools\ForceDeployment\SimTools_ForceDeployment.cpp"
 	#include "SimTools\Compositions\CfgFunctions.cpp"
+	class ASG {
+		class Compositions {
+			class deployComposition {file = "fn_deployComposition.sqf";};
+		};
+	};
 };
 
 class CfgCompositions {
@@ -34,6 +39,7 @@ class CfgORBAT {
 		commander = "GreekMen";
 		side = "Resistance";
 		tags[] = {"Greek", "AAF"};
+		deployment = "_this call ASG_fnc_deployComposition";
 	};
 
 	class GreekBattalion : BaseGreek {
@@ -41,8 +47,6 @@ class CfgORBAT {
 		idType = 0;
 		size = "Battalion";
 		type = "Infantry";
-		composition = "Compositions\AAFIFOB.sqe";
-		deploy = 1;
 	};
 
 	class GreekCompany : BaseGreek {
@@ -50,8 +54,6 @@ class CfgORBAT {
 		idType = 2;
 		size = "Company";
 		type = "Infantry";
-		composition = "Compositions\AAFICOP.sqe";
-		deploy = 1;
 	};
 
 	class GreekPlatoon : BaseGreek {
@@ -59,8 +61,6 @@ class CfgORBAT {
 		idType = 0;
 		size = "Platoon";
 		type = "Infantry";
-		composition = "Compositions\AAFIPB.sqe";
-		deploy = 1;
 	};
 
 	class GreekBrigade : BaseGreek {
